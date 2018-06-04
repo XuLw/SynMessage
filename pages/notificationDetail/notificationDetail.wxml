@@ -1,0 +1,21 @@
+<!--pages/notificationDetail/notificationDetail.wxml-->
+<view class='base-container'>
+  <scroll-view scroll-y class='detail-container'>
+    <view class='title-container'>
+      <text>总公司视察</text>
+    </view>
+
+    <view class='content-container'>
+      <text space="emsp">  后天下午总公司将会scroll-with-animatmationscroll-with-animationscroll-with-animation行各方面的审查，我派一个视察小组下来对我部进行各方面的午总公司将会scroll-with-animatmationscroll-with-animationscroll-with-animation行各方面的审查，我派一个视察小组下来对我部进行各方面的午总公司将会scroll-with-animatmationscroll-with-animationscroll-with-animation行各方面的审查，我派一个视察小组下来对我部进行各方面的午总公司将会scroll-with-animatmationscroll-with-animationscroll-with-animation行各方面的审查，我派一个视察小组下来对我部进行各方面的午总公司将会scroll-with-animatmationscroll-with-animationscroll-with-animation行各方面的审查，我派一个视察小组下来对我部进行各方面的午总公司将会scroll-with-animatmationscroll-with-animationscroll-with-animation行各方面的审查，我派一个视察小组下来对我部进行各方面的午总公司将会scroll-with-animatmationscroll-with-animationscroll-with-animation行各方面的审查，我派一个视察小组下来对我部进行各方面的午总公司将会scroll-with-animatmationscroll-with-animationscroll-with-animation行各方面的审查，我派一个视察小组下来对我部进行各方面的午总公司将会scroll-with-animatmationscroll-with-animationscroll-with-animation行各方面的审查，我派一个视察小组下来对我部进行各方面的审查，我派一个视小组...</text>
+    </view>
+    <view class='name-container'>
+      <text style='font-size:0.8em;'>written by</text>
+      <text>张三</text>
+    </view>
+    <view class='date-container'>
+      <text>1997-01-20 11:22
+    </text>
+    </view>
+  </scroll-view>
+  <button hover-class='button-cancle-down' hover-stay-time='100' class='button-cancle'>删 除</button>
+</view>
