@@ -14,7 +14,7 @@ page {
 }
 
 .detail-container {
-  height: 89%;
+  height: 91%;
   width: 100%;
 }
 
@@ -63,24 +63,74 @@ page {
   background-color: #b6d7a8;
 }
 
-.button-cancle {
-  width: 90%;
-  background-color: red;
+.foot-container {
+  width: 100%;
   position: fixed;
-  bottom: 20rpx;
-  right: -50rpx;
-  left: -50rpx;
-  color: white;
+  height: 9%;
+  display: flex;
+  flex-direction: row;
+  bottom: 0;
+  font-size: 1.2em;
 }
 
-.button-cancle-down {
-  width: 90%;
-  background-color: #c00;
-  position: fixed;
-  bottom: 20rpx;
-  right: -50rpx;
-  left: -50rpx;
+.foot-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  height: 100%;
+  color: #666;
+  background-color: white;
+}
+
+.foot-left-down {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  height: 100%;
+  color: #666;
+  background-color: #d4eac9;
+}
+
+.foot-middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 100%;
+  color: #666;
+  background-color: white;
+}
+
+.foot-middle-down {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 100%;
+  color: #666;
+  background-color: #bddfae;
+}
+
+.foot-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
   color: white;
+  background-color: #8eca74;
+}
+
+.foot-right-down {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+  color: white;
+  background-color: #39b778;
 }
 
 ::-webkit-scrollbar {

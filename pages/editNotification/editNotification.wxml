@@ -1,4 +1,3 @@
-<!--pages/newNotification/newNotification.wxml-->
 <view class='base-container'>
   <view class='system-notification'>
     <image class='noti-image' mode='scaleToFill' src='/images/notice.png'></image>
@@ -6,10 +5,10 @@
   </view>
   <form class='form-container' bindsubmit='submit'>
     <view class='section'>
-      <input type='text'  focus='true' placeholder='请输入标题'></input>
+      <input type='text' focus='true' placeholder='请输入标题'></input>
     </view>
     <view class='section'>
-      <textarea  maxlength='300' show-confirm-bar="false" placeholder='请输入内容 ( < 300 )'></textarea>
+      <textarea maxlength='300' show-confirm-bar="false" placeholder='请输入内容 ( < 300 )'></textarea>
     </view>
     <view class='section-deadline'>
       <text>截止时间</text>

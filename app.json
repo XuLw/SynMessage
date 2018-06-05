@@ -1,8 +1,10 @@
 {
   "pages": [
+    "pages/editNotification/editNotification",
+    "pages/sentNotificationDetail/sentNotificationDetail",
     "pages/main/main",
-    "pages/notificationDetail/notificationDetail",
     "pages/newNotification/newNotification",
+    "pages/notificationDetail/notificationDetail",
     "pages/index/index"
   ],
   "window": {
