@@ -6,15 +6,17 @@
     </view>
 
     <view class='content-container'>
-      <text space="emsp">  后天下午总公司将会scroll-with-animatma天下午总公司将会scroll-with-animatma天下午总公司将会scroll-with-animatma天下scroll-with-animatma天下午总公司将会scroll-with-animatmationscroll-with-animationsc将会scroll-with-animatma天下午总公司将会scroll-with-animatma天下午总公司将会scroll-with-animatma天下scroll-with-animatma天下午总公司将会scroll-with-animatmationscroll-with-animationsc将会scroll-with-animatma天下午总公司将会scroll-with-animatma天下午总公司将会scroll-with-animatma天下scroll-with-animatma天下午总公司将会scroll-with-animatmationscroll-with-animationscroll-with-animation行各方面的审查，我派一个视小组...</text>
+      <text space="emsp">  后天下午ith-animaation行各方面的审查，我派午ith-animaation行各方面的审查，我派午ith-animaation行各方面的审查，我派午ith-animaation行各方面的审查，我派午ith-animaation行各方面的审查，我派午ith-animaation行各方面的审查，我派午ith-animaation行各方面的审查，我派午ith-animaation行各方面的审查，我派午ith-animaation行各方面的审查，我派午ith-animaation行各方面的审查，我派午ith-animaation行各方面的审查，我派一个视小组...</text>
     </view>
     <view class='name-container'>
       <text style='font-size:0.8em;'>written by</text>
       <text>张三</text>
     </view>
     <view class='date-container'>
-      <text>1997-01-20 11:22
-    </text>
+      <text>1997-01-20 11:22</text>
+    </view>
+    <view class='read-container'>
+      <text>xulw、zjs、zzs等6人已读</text>
     </view>
   </scroll-view>
   <view class='foot-container'>

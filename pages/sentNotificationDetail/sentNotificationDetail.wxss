@@ -58,9 +58,17 @@ page {
   font-size: 0.9em;
   text-align: right;
   border-radius: 0 0 10rpx 10rpx;
-  margin: 0 10rpx 20rpx 10rpx;
+  margin: 0 10rpx 40rpx 10rpx;
   box-shadow: 0 20rpx 20rpx -10rpx #aaa;
   background-color: #b6d7a8;
+}
+
+.read-container {
+  height: 80rpx;
+  padding-left: 1em;
+  display: flex;
+  background: linear-gradient(to right, #e0e0e0, #f5f5f5);
+  align-items: center;
 }
 
 .foot-container {

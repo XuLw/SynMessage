@@ -6,7 +6,8 @@ Page({
    */
   data: {
     curDate: '',
-    curTime: ''
+    curTime: '',
+    shareStatus: false
   },
 
   /**
@@ -80,5 +81,10 @@ Page({
     this.setData({
       curTime: e.detail.value
     });
+  },
+  changeShareStatus: function (e) {
+    this.setData({
+      shareStatus: e.detail.value
+    })
   }
 })

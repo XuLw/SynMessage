@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/editNotification/editNotification",
-    "pages/sentNotificationDetail/sentNotificationDetail",
     "pages/main/main",
     "pages/newNotification/newNotification",
+    "pages/sentNotificationDetail/sentNotificationDetail",
+    "pages/editNotification/editNotification",
     "pages/notificationDetail/notificationDetail",
     "pages/index/index"
   ],

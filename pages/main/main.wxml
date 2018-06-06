@@ -17,7 +17,7 @@
     <swiper-item>
       <!-- 自己发送的通知的显示  -->
       <template is="sentNotificationTemplate"></template>
-     
+
     </swiper-item>
     <swiper-item>
       <!--全部的通知  -->

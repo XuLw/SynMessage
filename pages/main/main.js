@@ -9,7 +9,7 @@ Page({
    */
   data: {
     moreDetail: false,
-    currentTap: 0
+    currentTap: 1
   },
 
   /**

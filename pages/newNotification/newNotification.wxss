@@ -67,6 +67,15 @@ page {
   background-color: white;
 }
 
+.section-share {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10rpx;
+  padding: 20rpx;
+  background-color: white;
+}
+
 .submit-button {
   margin-top: 20rpx;
   width: 90%;
