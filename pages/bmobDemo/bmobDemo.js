@@ -18,60 +18,63 @@ Page({
    */
   onLoad: function (options) {
     //得到全部的 user 信息
-    //参数:callback
-    //bmobServer.getAllUserInfo(null);
+    //参数:callback,errCallback
+    //bmobServer.getAllUserInfo(null,null);
 
     //得到全部的 Message 消息
-    //参数:callback
-    //bmobServer.getAllMessageInfo(null);
+    //参数:callback,errCallback
+    //bmobServer.getAllMessageInfo(null,null);
 
     //得到指定userId的user信息
-    //参数:userId ,callback
-    //bmobServer.getUserInfoById("1",null);
+    //参数:userId ,callback,errCallback
+    //bmobServer.getUserInfoById("1",null,null);
 
     //得到指定messageId的message信息
-    //参数:messageId ,callback
-    //bmobServer.getMessageInfoById(1,null);
+    //参数:messageId ,callback,errCallback
+    //bmobServer.getMessageInfoById(1,null,null);
 
     //添加user
-    //参数:userId,name,callback
-    //bmobServer.addUserInfo("5","yang",null);
+    //参数:userId,name,callback,errCallback
+    //bmobServer.addUserInfo("5","yang",null,null);
     
     //var d3 = new Date(79,5,24,11,33,0);
     //var bmobDate = bmobServer.makeBmobDate(d3);
     //添加message
-    //参数:title,effect,time,content,author,callback
-    //bmobServer.addMessageInfo("title", true,bmobDate, "新添加的通知的内容", "李维刚", callback);
+    //参数:title,effect,time,content,author,callback,errCallback
+    //bmobServer.addMessageInfo("title", true,bmobDate, "新添加的通知的内容", "李维刚", callback,null);
 
     //添加user和message关系
-    //参数:userId,messageId,relation,callback
+    //参数:userId,messageId,relation,callback,errCallback
     //relation为bmobServerConfig.js中定义类型
     //relation.AsPersonal:个人消息
     //relation.AsReceiver:接受消息
     //relation.AsPublisher:发布消息
-    //bmobServer.addRelationInfo("2", 3, relation.AsPersonal,callback);
-    //bmobServer.addRelationInfo("2", 1, relation.AsReceiver,callback);
-    //bmobServer.addRelationInfo("5", 2, relation.AsReceiver,callback);
-    //bmobServer.addRelationInfo("5", 1, relation.AsPublisher,callback);
-    //bmobServer.addRelationInfo("5", 3, relation.AsPublisher,null);
-    //bmobServer.addRelationInfo("5", 8, relation.AsPublisher, null);
-    //bmobServer.addRelationInfo("5", 5, relation.AsPublisher, null);
+    //bmobServer.addRelationInfo("2", 3, relation.AsPersonal,callback,null);
+    //bmobServer.addRelationInfo("2", 1, relation.AsReceiver,callback,null);
+    //bmobServer.addRelationInfo("5", 2, relation.AsReceiver,callback,null);
+    //bmobServer.addRelationInfo("5", 1, relation.AsPublisher,callback,null);
+    //bmobServer.addRelationInfo("5", 3, relation.AsPublisher,null,null);
+    //bmobServer.addRelationInfo("5", 8, relation.AsPublisher, null,null);
+    //bmobServer.addRelationInfo("5", 5, relation.AsPublisher, null,null);
+
+
     //通过userId和relation查找对应的message
     //通过messageId和relation查找对应的message
     //同时执行下面两条语句,下面那一条会查不到数据
-    //bmobServer.getMessageByUserId("5",relation.AsPublisher,callback);
-    //bmobServer.getUserbyMessageId(2, relation.AsPublisher,callback);
-
+    //bmobServer.getMessageByUserId("5",relation.AsPublisher,callback,null);
+    //bmobServer.getUserbyMessageId(2, relation.AsPublisher,callback,null);
+    
     //修改message
-    //参数messageId,title,effect,time,content,author,callback
+    //参数messageId,title,effect,time,content,author,callback,errCallback
     //不修改的部分赋值Null
-    //bmobServer.modifyMessage(2,"被修改的title",false,null,"修改过后的内容","依然是我",callback);
+    //bmobServer.modifyMessage(2,"被修改的title",false,null,"修改过后的内容","依然是我",callback,null);
 
     // 添加限制的查询messager
     // var dateLimit = new Date(2020,2,3,10,0,0);
     // var messageDateLimit =bmobServer.makeBmobDate(dateLimit);
     // var limit=bmobServer.makeMessageLimit(10, messageDateLimit);
-    // bmobServer.getMessageByUserIdWithLimit("5", relation.AsPublisher, limit, null)
+    // 参数:userId,relation,messageLimit,callback,errCallback
+    // bmobServer.getMessageByUserIdWithLimit("5", relation.AsPublisher, limit, null,null)
   },
 
   /**
