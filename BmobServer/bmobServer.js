@@ -150,7 +150,6 @@ var modifyMessage = function (messageId, title,effect, time, content, author, ca
       console.log(err);
     })
 }
-<<<<<<< HEAD
 // 传入js中的Date,返回BmobDate
 var makeBmobDate=function(date)
 {
@@ -175,9 +174,6 @@ var formatDate = function (date) {
 };
 
 exports.makeBmobDate = makeBmobDate;
-=======
-
->>>>>>> 93f40aca8cd6609ecf471f4e19734a36fabc6d51
 exports.modifyMessage = modifyMessage;
 exports.getUserbyMessageId = getUserbyMessageId;
 exports.getMessageByUserId = getMessageByUserId;
