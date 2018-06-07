@@ -6,7 +6,8 @@
     "pages/editNotification/editNotification",
     "pages/notificationDetail/notificationDetail",
     "pages/index/index",
-    "pages/overdueNotificationDetail/overdueNotificationDetail"
+    "pages/overdueNotificationDetail/overdueNotificationDetail"£¬
+    "pages/bmobDemo/bmobDemo"
   ],
   "window": {
     "backgroundTextStyle": "light",
