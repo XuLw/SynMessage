@@ -63,9 +63,7 @@ var addMessageInfo = function (title, effect,time,content,author,callback)
     messageTable.set("effect", effect);
     messageTable.set("content", content);
     messageTable.set("author", author);
-    //messageTable.set("time",time);
-    messageTable.set("time", new Date());
-
+    messageTable.set("time",time);
     messageTable.save().then(res=>{
       console.log(res);
       callback(res);//回掉函数
@@ -139,8 +137,8 @@ var modifyMessage = function (messageId, title,effect, time, content, author, ca
       res.set("content", content);
       if(author!=null)
       res.set("author", author);
-    //if(author!=null) 
-    //res.set("time",time);
+      if(time!=null) 
+      res.set("time",time);
       res.saveAll().then(res=>{
         console.log(res);
         if(callback!=null)
@@ -152,6 +150,30 @@ var modifyMessage = function (messageId, title,effect, time, content, author, ca
       console.log(err);
     })
 }
+// 传入js中的Date,返回BmobDate
+var makeBmobDate=function(date)
+{
+  return  {
+    "__type": "Date",
+    "iso": formatDate(date)
+  }
+}
+// 将js的Date格式化为BmodDate格式
+var formatDate = function (date) {
+  var y = date.getFullYear();
+  var m = date.getMonth() + 1;
+  m = m < 10 ? ('0' + m) : m;
+  var d = date.getDate();
+  d = d < 10 ? ('0' + d) : d;
+  var h = date.getHours();
+  var minute = date.getMinutes();
+  minute = minute < 10 ? ('0' + minute) : minute;
+  var second = date.getSeconds();
+  second = minute < 10 ? ('0' + second) : second;
+  return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+};
+
+exports.makeBmobDate = makeBmobDate;
 exports.modifyMessage = modifyMessage;
 exports.getUserbyMessageId = getUserbyMessageId;
 exports.getMessageByUserId = getMessageByUserId;

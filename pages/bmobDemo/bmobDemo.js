@@ -36,10 +36,12 @@ Page({
     //添加user
     //参数:userId,name,callback
     //bmobServer.addUserInfo("5","yang",null);
-
+    
+    //var d3 = new Date(79,5,24,11,33,0);
+    //var bmobDate = bmobServer.makeBmobDate(d3);
     //添加message
     //参数:title,effect,time,content,author,callback
-    //bmobServer.addMessageInfo("title", true,null, "新添加的通知的内容", "李维刚", callback);
+    //bmobServer.addMessageInfo("title", true,bmobDate, "新添加的通知的内容", "李维刚", callback);
 
     //添加user和message关系
     //参数:userId,messageId,relation,callback
