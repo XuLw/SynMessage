@@ -9,3 +9,4 @@
 2. 需要使用Bmob服务的页面,导入bmobServer.js和bmobServerConfig.js
 3. 调用BmobServer中的函数
 具体的函数调用方法和解释,参考page/bmobDemo.js 
+(关于messageTable中的Date的设置失败尚未解决)
