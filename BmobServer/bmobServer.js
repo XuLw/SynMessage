@@ -94,6 +94,7 @@ var getMessageByUserId=function(userId,relation,callback)
     var messageIdArray = res.map(a => a.messageId);
     console.log(messageIdArray);
     messageTable.containedIn("messageId",messageIdArray);
+    messageTable.order("time");
     messageTable.find().then(res=>{
         console.log(res);
         callback(res);//回掉函数

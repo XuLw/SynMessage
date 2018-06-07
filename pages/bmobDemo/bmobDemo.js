@@ -53,7 +53,9 @@ Page({
     //bmobServer.addRelationInfo("2", 1, relation.AsReceiver,callback);
     //bmobServer.addRelationInfo("5", 2, relation.AsReceiver,callback);
     //bmobServer.addRelationInfo("5", 1, relation.AsPublisher,callback);
-
+    //bmobServer.addRelationInfo("5", 3, relation.AsPublisher,null);
+    //bmobServer.addRelationInfo("5", 8, relation.AsPublisher, null);
+    //bmobServer.addRelationInfo("5", 5, relation.AsPublisher, null);
     //通过userId和relation查找对应的message
     //通过messageId和relation查找对应的message
     //同时执行下面两条语句,下面那一条会查不到数据
