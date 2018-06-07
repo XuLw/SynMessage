@@ -152,6 +152,7 @@ var modifyMessage = function (messageId, title,effect, time, content, author, ca
       console.log(err);
     })
 }
+
 exports.modifyMessage = modifyMessage;
 exports.getUserbyMessageId = getUserbyMessageId;
 exports.getMessageByUserId = getMessageByUserId;
