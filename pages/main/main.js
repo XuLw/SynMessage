@@ -1,6 +1,9 @@
 // pages/main/main.js
 
-var sentNotification = require("../../templates/sent_notification_template.js");
+var sentNotification = require("../../templates/sent_notification_template/sent_notification_template.js");
+var allNotification = require("../../templates/all_notification_template/all_notification_template.js");
+var overdueNotification = require("../../templates/overdue_notification_template/overdue_notification_template.js");
+
 
 Page({
 
@@ -16,7 +19,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.tapOnSentDetail = sentNotification.tapOnSentDetail
+    this.tapOnSentDetail = sentNotification.tapOnSentDetail;
+    this.tapOnAllDetail  = allNotification.tapOnAllDetail;
+    this.tapOnOverdueDetail = overdueNotification.tapOnOverdueDetail;
   },
 
   /**
@@ -80,7 +85,7 @@ Page({
   },
   slideOnSwiper: function (e) {
     this.setData({
-      currentTap : e.detail.current
+      currentTap: e.detail.current
     })
   },
   switchTitle: function (e) {

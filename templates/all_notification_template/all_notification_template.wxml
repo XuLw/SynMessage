@@ -1,0 +1,16 @@
+<template name="allNotificationTemplate">
+  <scroll-view scroll-y class='all-body-container'>
+    <view class='all-notification-container' catchtap='extendNotification'>
+      <view class='all-noti-time-container'>
+        <text>2018-5-4</text>
+        <text>00:00</text>
+      </view>
+      <view class='all-noti-body-container'>
+        <view class='all-noti-body'>
+          <text > 通知的标题 </text>
+          <text class='all-noti-author'>xulw</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</template>

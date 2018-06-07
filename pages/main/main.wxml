@@ -1,5 +1,7 @@
 <!--pages/main/main.wxml-->
-<import src='../../templates/sent_notification_template.wxml' />
+<import src='../../templates/sent_notification_template/sent_notification_template.wxml' />
+<import src='../../templates/all_notification_template/all_notification_template.wxml' />
+<import src='../../templates/overdue_notification_template/overdue_notification_template.wxml' />
 
 <view class='base-container'>
   <view class='head-container'>
@@ -21,90 +23,13 @@
     </swiper-item>
     <swiper-item>
       <!--全部的通知  -->
-      <scroll-view scroll-y class='body-container'>
-        <view class='notification-container' catchtap='extendNotification'>
-          <view class='noti-time-container'>
-            <text>2018-5-4</text>
-            <text>00:00</text>
-          </view>
-          <view class='noti-body-container'>
-            <view class='noti-body'>
-              <text> 通知的标题 </text>
-              <image style='height:50rpx;width:50rpx;margin-right:16rpx;' mode="scaleToFill" src='/images/more.png'></image>
-            </view>
-          </view>
-        </view>
-        <view class='notification-container' catchtap='extendNotification'>
-          <view class='noti-time-container'>
-            <text>2018-5-4</text>
-            <text>00:01</text>
-          </view>
-          <view class='noti-body-container'>
-            <view style='background-color:#b6d7a8;' class='noti-body'>
-              <text> 通知的标题1 </text>
-              <image style='height:50rpx;width:50rpx;margin-right:16rpx;' mode="scaleToFill" src='/images/more.png'>
-              </image>
-            </view>
-          </view>
-        </view>
-        <view class='notification-container' catchtap='extendNotification'>
-          <view class='noti-time-container'>
-            <text>2018-5-4</text>
-            <text>00:02</text>
-          </view>
-          <view class='noti-body-container'>
-            <view style='background-color:#9fc5e8;' class='noti-body'>
-              <text> 通知的标题2 </text>
-              <image style='height:50rpx;width:50rpx;margin-right:16rpx;' mode="scaleToFill" src='/images/more.png'></image>
-            </view>
-          </view>
-        </view>
-      </scroll-view>
+      <template is="allNotificationTemplate"></template>
     </swiper-item>
     <swiper-item>
       <!--过期的通知  -->
-      <scroll-view scroll-y class='body-container'>
-        <view class='notification-container' catchtap='extendNotification'>
-          <view class='noti-time-container'>
-            <text>2018-5-4</text>
-            <text>00:00</text>
-          </view>
-          <view class='noti-body-container'>
-            <view class='noti-body'>
-              <text> 通知的标题 </text>
-              <image style='height:50rpx;width:50rpx;margin-right:16rpx;' mode="scaleToFill" src='/images/more.png'></image>
-            </view>
-          </view>
-        </view>
-        <view class='notification-container' catchtap='extendNotification'>
-          <view class='noti-time-container'>
-            <text>2018-5-4</text>
-            <text>00:01</text>
-          </view>
-          <view class='noti-body-container'>
-            <view style='background-color:#b6d7a8;' class='noti-body'>
-              <text> 通知的标题1 </text>
-              <image style='height:50rpx;width:50rpx;margin-right:16rpx;' mode="scaleToFill" src='/images/more.png'>
-              </image>
-            </view>
-          </view>
-        </view>
-        <view class='notification-container' catchtap='extendNotification'>
-          <view class='noti-time-container'>
-            <text>2018-5-4</text>
-            <text>00:02</text>
-          </view>
-          <view class='noti-body-container'>
-            <view style='background-color:#9fc5e8;' class='noti-body'>
-              <text> 通知的标题2 </text>
-              <image style='height:50rpx;width:50rpx;margin-right:16rpx;' mode="scaleToFill" src='/images/more.png'></image>
-            </view>
-          </view>
-        </view>
-      </scroll-view>
+      <template is="overdueNotificationTemplate"></template>
     </swiper-item>
   </swiper>
-
 
   <view class='add-notification' hover-class='add-notification-down' hover-stay-time='100' catchtap='tapOnNewNotification'>
     <image style='height:50rpx;width:50rpx;' mode="scaleToFill" src='/images/plus.png'></image>

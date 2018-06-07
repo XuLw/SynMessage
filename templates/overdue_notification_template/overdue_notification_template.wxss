@@ -1,6 +1,6 @@
 /*通知体  */
 
-.sent-body-container {
+.overdue-body-container {
   height: 100%;
   width: 100%;
   /* outline: 1px dashed red; */
@@ -8,8 +8,8 @@
 
 /*通知  */
 
-.sent-notification-container {
-  height: 200rpx;
+.overdue-notification-container {
+  height: 140rpx;
   display: flex;
   flex-direction: row;
   overflow: hidden;
@@ -20,7 +20,7 @@
 
 /*时间  */
 
-.sent-noti-time-container {
+.overdue-noti-time-container {
   width: 30%;
   height: 100%;
   display: flex;
@@ -33,7 +33,7 @@
 
 /*通知体  */
 
-.sent-noti-body-container {
+.overdue-noti-body-container {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -41,41 +41,15 @@
   width: 70%;
 }
 
-.sent-noti-body {
+.overdue-noti-body {
   height: 90%;
   width: 90%;
   display: flex;
-  flex-direction: column;
+  padding-left: 1em;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-radius: 8rpx;
-  /* outline: 1px solid red; */
-  background-color: pink;
+  background-color: #f7f7f7;
   box-shadow: 0 10rpx 10rpx -5rpx #aaa;
-}
-
-.sent-title-container {
-  height: 70%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.sent-title-container text {
-  padding-left: 1em;
-  line-height: 1em;
-  max-height: 2em;
-  overflow: hidden;
-}
-
-.sent-read {
-  width: 100%;
-  height: 30%;
-  background: linear-gradient(to right, pink, #fff, pink);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.7em;
 }
