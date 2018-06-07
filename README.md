@@ -2,6 +2,17 @@
 更方便的管理通知
 
 ## 2018.6.7 李伟港
+解决Date无法提交问题
+1. 正常使用BmobServer内的函数
+2. 对于Date数据,需要将js中的Date类型转换成BmobDate类型
+实例: 
+```javascript
+var date = new Date();//js中的Date类型
+var bmobDate = bmobServer.makeBmobDate(date);//Bmob数据库中需要的Date类型
+//再将这个bmobDate用到需要BmobDate的地方即可
+```
+
+## 2018.6.7 李伟港
 对Bmob的功能进行封装
 
 ### 使用方法:
