@@ -105,6 +105,35 @@ var getMessageByUserId=function(userId,relation,callback)
       console.log(err);
   })
 }
+// 通过userId得到与其特定relation的且满足messageLimit的message数组
+var getMessageByUserIdWithLimit = function (userId, relation,messageLimit, callback){
+  relationTable.equalTo("userId", "==", userId);
+  relationTable.equalTo("relation", "==", relation);
+  relationTable.find().then(res => {
+    console.log(res);
+    var messageIdArray = res.map(a => a.messageId);
+    console.log(messageIdArray);
+    messageTable.containedIn("messageId", messageIdArray);
+    messageTable.order("time");
+    messageTable.limit(messageLimit.countLimit);
+    messageTable.equalTo("time", ">", messageLimit.dateLimit);
+    messageTable.find().then(res => {
+      console.log(res);
+      callback(res);//回掉函数
+    }).catch(err => {
+      console.log(err);
+    })
+  }).catch(err => {
+    console.log(err);
+  })
+}
+// 创建messageLimit,传入messageCountLimit为数量限制,messageDateLimit为BmobDate类型的时间限制
+var makeMessageLimit = function (messageCountLimit,messageDateLimit){
+  return {
+    countLimit: messageCountLimit,
+    dateLimit: messageDateLimit
+  }
+}
 // 通过messageId得到与其特点relation的user数组
 var getUserbyMessageId=function(messageId,relation,callback){
   relationTable.equalTo("messageId", "==", messageId);
@@ -173,7 +202,8 @@ var formatDate = function (date) {
   second = minute < 10 ? ('0' + second) : second;
   return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 };
-
+exports.makeMessageLimit=makeMessageLimit;
+exports.getMessageByUserIdWithLimit=getMessageByUserIdWithLimit;
 exports.makeBmobDate = makeBmobDate;
 exports.modifyMessage = modifyMessage;
 exports.getUserbyMessageId = getUserbyMessageId;

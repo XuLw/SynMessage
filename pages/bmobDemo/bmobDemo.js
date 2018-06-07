@@ -66,6 +66,12 @@ Page({
     //参数messageId,title,effect,time,content,author,callback
     //不修改的部分赋值Null
     //bmobServer.modifyMessage(2,"被修改的title",false,null,"修改过后的内容","依然是我",callback);
+
+    // 添加限制的查询messager
+    // var dateLimit = new Date(2020,2,3,10,0,0);
+    // var messageDateLimit =bmobServer.makeBmobDate(dateLimit);
+    // var limit=bmobServer.makeMessageLimit(10, messageDateLimit);
+    // bmobServer.getMessageByUserIdWithLimit("5", relation.AsPublisher, limit, null)
   },
 
   /**
