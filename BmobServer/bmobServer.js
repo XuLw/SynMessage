@@ -196,7 +196,7 @@ var modifyMessage = function (messageId, title,effect, time, content, author, ca
     })
 }
 // 传入js中的Date,返回BmobDate
-var makeBmobDate=function(date)
+var translateDateToBmobDate=function(date)
 {
   return  {
     "__type": "Date",
@@ -217,9 +217,25 @@ var formatDate = function (date) {
   second = minute < 10 ? ('0' + second) : second;
   return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 };
+// 传入BmobDate转换成Date
+var translateBmobDateToDate=function(BmobDate)
+{
+  return convertDateFromString(BmobDate.iso);
+}
+// 将BmobDate中的日期格式转换成Date日期格式
+function convertDateFromString(dateString) {
+  if (dateString) {
+    var arr1 = dateString.split(" ");
+    var sdate = arr1[0].split('-');
+    var date = new Date(sdate[0], sdate[1] - 1, sdate[2]);
+    return date;
+  }
+}
+
+exports.translateBmobDateToDate = translateBmobDateToDate;
 exports.makeMessageLimit=makeMessageLimit;
 exports.getMessageByUserIdWithLimit=getMessageByUserIdWithLimit;
-exports.makeBmobDate = makeBmobDate;
+exports.translateDateToBmobDate = translateDateToBmobDate;
 exports.modifyMessage = modifyMessage;
 exports.getUserbyMessageId = getUserbyMessageId;
 exports.getMessageByUserId = getMessageByUserId;

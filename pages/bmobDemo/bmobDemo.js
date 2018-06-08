@@ -75,6 +75,11 @@ Page({
     // var limit=bmobServer.makeMessageLimit(10, messageDateLimit);
     // 参数:userId,relation,messageLimit,callback,errCallback
     // bmobServer.getMessageByUserIdWithLimit("5", relation.AsPublisher, limit, null,null)
+
+    //将BmobDate转换成Date
+    // var date = new Date(2020,2,3,10,0,0);
+    // var bmobDate = bmobServer.translateDateToBmobDate(date);
+    // var dateR = bmobServer.translateBmobDateToDate(bmobDate);
   },
 
   /**
