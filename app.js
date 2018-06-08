@@ -11,5 +11,5 @@ App({
   globalData: {
     userInfo: null
   },
-  userId: "5"
+  userId: "2"
 })

@@ -6,7 +6,7 @@ var messageTable = Bmob.Query('myMessageTable');
 var relationTable = Bmob.Query('myRelationTable');
 
 // 初始化BmobServer 并通过callback返回用户信息
-var initialize = function(callback,errCallback){
+var initialize = function (callback, errCallback) {
   Bmob.initialize(BmobConfig.bmobKey.AppId, BmobConfig.bmobKey.RestKey);
   Bmob.User.auth().then(res => {
     console.log(res)
@@ -19,9 +19,8 @@ var initialize = function(callback,errCallback){
 }
 
 // 得到所有用户信息
-var getAllUserInfo =function(callback,errCallback)
-{
-  userTable.find().then(res=>{
+var getAllUserInfo = function (callback, errCallback) {
+  userTable.find().then(res => {
     console.log(res);
     callback(res);//回掉函数
   }).catch(err => {

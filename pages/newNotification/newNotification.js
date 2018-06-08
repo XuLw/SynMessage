@@ -89,17 +89,21 @@ Page({
         title: '标题不能为空！',
         icon: "none",
         duration: 1000
-      })
+      });
     var content = v.content;
     var deadlineDate = v.deadlineDate;
     var deadlineTime = v.deadlineTime;
     var dateTime = new Date(deadlineDate + " " + deadlineTime);
-    console.log(dateTime);
     var bmobDate = utils.dateToBDate(dateTime);
     var name = v.name;
-    var isShare = v.isShare;
 
-    // bmobServer.addMessageInfo(title, true, bmobDate, content, name, this.addMessageInfoCallback, null);
+    wx.showToast({
+      title: '上传中',
+      icon: 'loading',
+      mask: true,
+      duration: 5000
+    })
+    bmobServer.addMessageInfo(title, true, bmobDate, content, name, this.addMessageInfoCallback, null);
 
   },
   selectDate: function (e) {
@@ -126,6 +130,13 @@ Page({
   addRelationInfoCallback(message) {
     console.log(message);
     console.log("上传关系成功！");
+    wx.hideToast();
+    wx.showToast({
+      title: '上传成功！',
+      duration: 1000,
+      icon: "success"
+    })
+    
   },
   addRelationInfoErrCallback(message) {
     console.log(message);

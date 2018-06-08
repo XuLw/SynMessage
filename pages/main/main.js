@@ -35,10 +35,12 @@ Page({
     this.tapOnOverdueDetail = overdueNotification.tapOnOverdueDetail;
 
     // bmobServer.getAllMessageInfo(this.getAllMessageInfoCallback);
-
-    bmobServer.getMessageByUserId(userId, relation.AsPublisher, this.publicMessageCallback, this.publicMessageCallback);
-    // bmobServer.getMessageByUserId(userId, relation.AsReceiver, this.receivedMessageCallback, this.receivedMessageCallback);
-    // bmobServer.getMessageByUserId(userId, relation.AsPersonal, this.personalMessageCallback, this.personalMessageCallback);
+    wx.showToast({
+      title: '加载中',
+      duration: 5000,
+      icon: "loading"
+    })
+    bmobServer.getMessageByUserId(userId, relation.AsPublisher, this.publicMessageCallback, null);
   },
 
   /**
@@ -134,19 +136,33 @@ Page({
 
     }
 
-
     this.setData({
       allMessage: temp
     });
     console.log(this.data.allMessage);
   },
-  personalMessageCallback(message) {
-    // console.log("S" + message);
-  },
-  publicMessageCallback(message) {
-    console.log(message);
+  getMessageCallback(message) {
+    this.setData({
+      publicMessage: message
+    });
+
+    bmobServer.getMessageByUserId(userId, relation.AsReceiver, this.receivedMessageCallback, null);
+
   },
   receivedMessageCallback(message) {
     // console.log(message);
+    this.setData({
+      receivedMessage: message
+    });
+
+    bmobServer.getMessageByUserId(userId, relation.AsPersonal, this.personalMessageCallback, null);
+
+  },
+  personalMessageCallback(message) {
+    this.setData({
+      personalMessage: message
+    });
+    wx.hideToast();
   }
+
 })
