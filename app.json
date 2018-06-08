@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/main/main",
+    "pages/index/index",
     "pages/newNotification/newNotification",
     "pages/sentNotificationDetail/sentNotificationDetail",
     "pages/editNotification/editNotification",
     "pages/notificationDetail/notificationDetail",
-    "pages/index/index",
     "pages/overdueNotificationDetail/overdueNotificationDetail",
     "pages/bmobDemo/bmobDemo"
   ],

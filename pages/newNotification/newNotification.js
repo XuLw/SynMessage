@@ -4,6 +4,8 @@ var bmobServer = require("../../BmobServer/bmobServer.js");
 var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
 var relation = bmobConfig.relation;
 
+var utils = require("../../utils/util.js");
+
 Page({
 
   /**
@@ -82,16 +84,22 @@ Page({
   submit: function (e) {
     var v = e.detail.value;
     var title = v.title;
+    if (title === "")
+      wx.showToast({
+        title: '标题不能为空！',
+        icon: "none",
+        duration: 1000
+      })
     var content = v.content;
     var deadlineDate = v.deadlineDate;
     var deadlineTime = v.deadlineTime;
     var dateTime = new Date(deadlineDate + " " + deadlineTime);
-    dateTime.setSeconds(1);
-    var bmobDate = bmobServer.makeBmobDate(dateTime);
+    console.log(dateTime);
+    var bmobDate = utils.dateToBDate(dateTime);
     var name = v.name;
     var isShare = v.isShare;
 
-    bmobServer.addMessageInfo(title, true, bmobDate, content, name, this.addMessageInfoCallback);
+    // bmobServer.addMessageInfo(title, true, bmobDate, content, name, this.addMessageInfoCallback, null);
 
   },
   selectDate: function (e) {
@@ -110,11 +118,16 @@ Page({
     })
   },
   addMessageInfoCallback(message) {
-    console.log(message);
-
-    // bmobServer.addRelationInfo("2", 3, relation.AsPersonal, this.addRelationInfo, );
+    console.log("上传通知成功！")
+    console.log(message[0].messageId);
+    var mRelation = this.data.shareStatus ? relation.AsPublisher : relation.AsPersonal;
+    bmobServer.addRelationInfo("2", message[0].messageId, mRelation, true, this.addRelationInfoCallback, this.addRelationInfoErrCallback);
   },
   addRelationInfoCallback(message) {
+    console.log(message);
+    console.log("上传关系成功！");
+  },
+  addRelationInfoErrCallback(message) {
     console.log(message);
   }
 })

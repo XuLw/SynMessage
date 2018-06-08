@@ -36,7 +36,7 @@ Page({
     //添加user
     //参数:userId,name,callback,errCallback
     //bmobServer.addUserInfo("5","yang",null,null);
-    
+
     //var d3 = new Date(79,5,24,11,33,0);
     //var bmobDate = bmobServer.makeBmobDate(d3);
     //添加message
@@ -63,7 +63,7 @@ Page({
     //同时执行下面两条语句,下面那一条会查不到数据
     //bmobServer.getMessageByUserId("5",relation.AsPublisher,callback,null);
     //bmobServer.getUserbyMessageId(2, relation.AsPublisher,callback,null);
-    
+
     //修改message
     //参数messageId,title,effect,time,content,author,callback,errCallback
     //不修改的部分赋值Null

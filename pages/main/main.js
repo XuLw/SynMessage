@@ -8,6 +8,9 @@ var bmobServer = require("../../BmobServer/bmobServer.js");
 var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
 var relation = bmobConfig.relation;
 
+
+var userId = getApp().userId;
+
 Page({
 
   /**
@@ -16,7 +19,10 @@ Page({
   data: {
     moreDetail: false,
     currentTap: 1,
-    allMessage: []
+    personalMessage: [],
+    publicMessage: [],
+    receivedMessage: []
+
   },
 
   /**
@@ -29,6 +35,10 @@ Page({
     this.tapOnOverdueDetail = overdueNotification.tapOnOverdueDetail;
 
     // bmobServer.getAllMessageInfo(this.getAllMessageInfoCallback);
+
+    bmobServer.getMessageByUserId(userId, relation.AsPublisher, this.publicMessageCallback, this.publicMessageCallback);
+    // bmobServer.getMessageByUserId(userId, relation.AsReceiver, this.receivedMessageCallback, this.receivedMessageCallback);
+    // bmobServer.getMessageByUserId(userId, relation.AsPersonal, this.personalMessageCallback, this.personalMessageCallback);
   },
 
   /**
@@ -128,8 +138,15 @@ Page({
     this.setData({
       allMessage: temp
     });
-
     console.log(this.data.allMessage);
-
+  },
+  personalMessageCallback(message) {
+    // console.log("S" + message);
+  },
+  publicMessageCallback(message) {
+    console.log(message);
+  },
+  receivedMessageCallback(message) {
+    // console.log(message);
   }
 })
