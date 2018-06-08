@@ -10,9 +10,7 @@ var relation = bmobConfig.relation;
 
 var app = getApp();
 
-var userId = getApp().userId;
-
-var allMessages = [];
+var userId = app.userId;
 
 var today = new Date();
 
@@ -126,32 +124,7 @@ Page({
       })
     }
   },
-  getAllMessageInfoCallback(message) {
-
-    var temp = [];
-
-    for (var i = 0; i < message.length; i++) {
-      var eachMeassge = {};
-      eachMeassge.title = message[i].title;
-      eachMeassge.content = message[i].content;
-      eachMeassge.author = message[i].author;
-
-      eachMeassge.date = message[i].time.iso.substr(0, 10);
-      eachMeassge.time = message[i].time.iso.substr(11, 5);
-
-      temp.push(eachMeassge);
-
-    }
-
-    this.setData({
-      allMessage: temp
-    });
-    console.log(this.data.allMessage);
-  },
   publicMessageCallback(message) {
-
-    allMessages = allMessages.concat(message);
-    console.log(message)
 
     today.setSeconds(0);
 
@@ -175,8 +148,6 @@ Page({
   },
   receivedMessageCallback(message) {
 
-    allMessages = allMessages.concat(message);
-
     for (var i = 0; i < message.length; i++) {
       //转换为js里面的Date
       var date = bmobServer.translateBmobDateToDate(message[i].time);
@@ -196,8 +167,6 @@ Page({
 
   },
   personalMessageCallback(message) {
-
-    allMessages = allMessages.concat(message);
 
     for (var i = 0; i < message.length; i++) {
       //转换为js里面的Date

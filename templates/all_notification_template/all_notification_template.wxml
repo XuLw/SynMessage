@@ -1,5 +1,5 @@
 <template name="allNotificationTemplate">
-  <view class='all-notification-container' catchtap='extendNotification'>
+  <view class='all-notification-container' catchtap='tapOnAllDetail' data-id="{{id}}">
     <view class='all-noti-time-container'>
       <text>{{date}}</text>
       <text>{{time}}</text>

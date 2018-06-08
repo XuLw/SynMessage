@@ -1,7 +1,7 @@
 const AllNotification = {
-  tapOnSentDetail: function (e) {
+  tapOnAllDetail: function (e) {
     wx.navigateTo({
-      url: "/pages/notificationDetail/notificationDetail",
+      url: "/pages/notificationDetail/notificationDetail" + "?id=" + e.currentTarget.dataset.id,
     })
   }
 

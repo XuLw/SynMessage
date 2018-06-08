@@ -1,5 +1,5 @@
 <template name="sentNotificationTemplate">
-  <view class='sent-notification-container' catchtap="tapOnSentDetail">
+  <view class='sent-notification-container' catchtap="tapOnSentDetail" data-id="{{id}}">
     <view class='sent-noti-time-container'>
       <text>{{date}}</text>
       <text>{{time}}</text>
