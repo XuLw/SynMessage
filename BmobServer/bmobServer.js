@@ -72,7 +72,14 @@ var addMessageInfo = function (title, effect,time,content,author,callback,errCal
     messageTable.set("time",time);
     messageTable.save().then(res=>{
       console.log(res);
-      callback(res);//回掉函数
+      messageTable.equalTo("objectId","==",res.objectId);
+      messageTable.find().then(res=>{
+        console.log(res);
+        callback(res);
+      }).catch(err=>{
+        console.log(err);
+        errCallback(err);
+      })
     }).catch(err=>{
       console.log(err);
       errCallback(err);//错误回调函数
