@@ -1,16 +1,14 @@
 <template name="allNotificationTemplate">
-  <scroll-view scroll-y class='all-body-container'>
-    <view class='all-notification-container' catchtap='extendNotification'>
-      <view class='all-noti-time-container'>
-        <text>2018-5-4</text>
-         <text>00:00</text> 
-      </view>
-      <view class='all-noti-body-container'>
-        <view class='all-noti-body'>
-          <text class='all-noti-title'> 通知的标题通知的标题通知知的标题通知知的标题通知的标题 </text>
-          <text class='all-noti-author'>x知的标lw</text>
-        </view>
+  <view class='all-notification-container' catchtap='extendNotification'>
+    <view class='all-noti-time-container'>
+      <text>{{date}}</text>
+      <text>{{time}}</text>
+    </view>
+    <view class='all-noti-body-container'>
+      <view class='all-noti-body'>
+        <text class='all-noti-title'>{{title}}</text>
+        <text class='all-noti-author'>{{name}}</text>
       </view>
     </view>
-  </scroll-view>
+  </view>
 </template>

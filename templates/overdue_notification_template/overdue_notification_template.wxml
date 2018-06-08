@@ -1,17 +1,15 @@
 <template name="overdueNotificationTemplate">
-  <scroll-view scroll-y class='overdue-body-container'>
-    <view class='overdue-notification-container' catchtap='tapOnOverdueDetail'>
-      <view class='overdue-noti-time-container'>
-        <text>2018-5-4</text>
-        <text>00:00</text>
-      </view>
-      <view class='overdue-noti-body-container'>
-        <view class='overdue-noti-body'>
-          <text class='overdue-noti-title'> 通知的标题通知的标题通知的标题通知的标题通知的标题 </text>
-          <image style='height:50rpx;width:50rpx;margin-right:16rpx;' mode="scaleToFill" src='/images/more.png'></image>
-        </view>
+  <view class='overdue-notification-container' catchtap='tapOnOverdueDetail'>
+    <view class='overdue-noti-time-container'>
+      <text>2018-5-4</text>
+      <text>00:00</text>
+    </view>
+    <view class='overdue-noti-body-container'>
+      <view class='overdue-noti-body'>
+        <text class='overdue-noti-title'> 通知的标题通知的标题通知的标题通知的标题通知的标题 </text>
+        <image style='height:50rpx;width:50rpx;margin-right:16rpx;' mode="scaleToFill" src='/images/more.png'></image>
       </view>
     </view>
+  </view>
 
-  </scroll-view>
 </template>

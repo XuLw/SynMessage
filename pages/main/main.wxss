@@ -37,6 +37,12 @@ page {
   font-size: 1.3em;
 }
 
+.body-container {
+  height: 100%;
+  width: 100%;
+  /* outline: 1px dashed red; */
+}
+
 .swiper-container {
   height: 90%;
   width: 100%;

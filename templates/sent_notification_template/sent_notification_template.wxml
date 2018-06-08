@@ -1,5 +1,4 @@
 <template name="sentNotificationTemplate">
-  <scroll-view scroll-y class='sent-body-container'>
     <view class='sent-notification-container' catchtap="tapOnSentDetail">
       <view class='sent-noti-time-container'>
         <text>2018-5-4</text>
@@ -18,5 +17,4 @@
       </view>
     </view>
     
-  </scroll-view>
 </template>

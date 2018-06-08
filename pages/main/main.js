@@ -28,7 +28,7 @@ Page({
     this.tapOnAllDetail = allNotification.tapOnAllDetail;
     this.tapOnOverdueDetail = overdueNotification.tapOnOverdueDetail;
 
-    bmobServer.getAllMessageInfo(this.getAllMessageInfoCallback);
+    // bmobServer.getAllMessageInfo(this.getAllMessageInfoCallback);
   },
 
   /**
@@ -79,12 +79,14 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 展开信息
+
   tapOnNewNotification: function () {
+    var that = this;
     wx.navigateTo({
-      url: '/pages/newNotification/newNotification',
+      url: '/pages/newNotification/newNotification' + '?from=' + that.data.currentTap
     })
   },
+  // 展开信息
   extendNotification: function (e) {
     wx.navigateTo({
       url: "/pages/notificationDetail/notificationDetail",
@@ -108,17 +110,18 @@ Page({
   getAllMessageInfoCallback(message) {
 
     var temp = [];
-    var eachMeassge = {};
+
     for (var i = 0; i < message.length; i++) {
+      var eachMeassge = {};
       eachMeassge.title = message[i].title;
       eachMeassge.content = message[i].content;
       eachMeassge.author = message[i].author;
 
-      eachMeassge.date = message[i].time.iso.substr(0, 8);
-      eachMeassge.time = message[i].time.iso.substr(9, 8);
+      eachMeassge.date = message[i].time.iso.substr(0, 10);
+      eachMeassge.time = message[i].time.iso.substr(11, 5);
 
       temp.push(eachMeassge);
-      
+
     }
 
 
@@ -126,6 +129,7 @@ Page({
       allMessage: temp
     });
 
-    console.log(temp);
+    console.log(this.data.allMessage);
+
   }
 })
