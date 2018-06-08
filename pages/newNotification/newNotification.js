@@ -1,4 +1,9 @@
 // pages/newNotification/newNotification.js
+
+var bmobServer = require("../../BmobServer/bmobServer.js");
+var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
+var relation = bmobConfig.relation;
+
 Page({
 
   /**
@@ -14,7 +19,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // console.log(options.from)
+    if (options.from == 0) {
+      this.setData({
+        shareStatus: true
+      })
+    }
   },
 
   /**
@@ -70,6 +80,18 @@ Page({
 
   },
   submit: function (e) {
+    var v = e.detail.value;
+    var title = v.title;
+    var content = v.content;
+    var deadlineDate = v.deadlineDate;
+    var deadlineTime = v.deadlineTime;
+    var dateTime = new Date(deadlineDate + " " + deadlineTime);
+    dateTime.setSeconds(1);
+    var bmobDate = bmobServer.makeBmobDate(dateTime);
+    var name = v.name;
+    var isShare = v.isShare;
+
+    bmobServer.addMessageInfo(title, true, bmobDate, content, name, this.addMessageInfoCallback);
 
   },
   selectDate: function (e) {
@@ -86,5 +108,13 @@ Page({
     this.setData({
       shareStatus: e.detail.value
     })
+  },
+  addMessageInfoCallback(message) {
+    console.log(message);
+
+    // bmobServer.addRelationInfo("2", 3, relation.AsPersonal, this.addRelationInfo, );
+  },
+  addRelationInfoCallback(message) {
+    console.log(message);
   }
 })

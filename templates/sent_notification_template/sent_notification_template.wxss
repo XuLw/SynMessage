@@ -50,7 +50,7 @@
   align-items: center;
   border-radius: 8rpx;
   /* outline: 1px solid red; */
-  background-color: 	#FDF5E6;
+  background-color: #fdf5e6;
   box-shadow: 0 10rpx 10rpx -5rpx #aaa;
 }
 
@@ -63,16 +63,20 @@
 }
 
 .sent-title-container text {
-  padding-left: 1em;
-  line-height: 1em;
-  max-height: 2em;
+  /* outline: 1px solid red; */
+  padding: 0 1em;
+  display: -webkit-box;
   overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .sent-read {
   width: 100%;
   height: 30%;
-  background: linear-gradient(to right,	#FDF5E6, #fff, 	#FDF5E6);
+  background: linear-gradient(to right, #fdf5e6, #fff, #fdf5e6);
   display: flex;
   flex-direction: row;
   justify-content: space-between;

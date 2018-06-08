@@ -6,26 +6,26 @@
   </view>
   <form class='form-container' bindsubmit='submit'>
     <view class='section'>
-      <input type='text' focus='true' placeholder='请输入标题'></input>
+      <input name='title' type='text' focus='true' placeholder='请输入标题'></input>
     </view>
     <view class='section'>
-      <textarea maxlength='300' show-confirm-bar="false" placeholder='请输入内容 ( < 300 )'></textarea>
+      <textarea name='content' maxlength='300' show-confirm-bar="false" placeholder='请输入内容 ( < 300 )'></textarea>
     </view>
     <view class='section-deadline'>
       <text>截止时间</text>
       <view class='deadline'>
-        <picker bindchange='selectDate' mode='date' value="{{curDate}}" start="curDate">{{curDate}}</picker>
-        <picker bindchange='selectTime' mode='time' value="{{curTime}}" start="curTime">{{curTime}}</picker>
+        <picker name='deadlineDate' bindchange='selectDate' mode='date' value="{{curDate}}" start="curDate">{{curDate}}</picker>
+        <picker name='deadlineTime' bindchange='selectTime' mode='time' value="{{curTime}}" start="curTime">{{curTime}}</picker>
       </view>
     </view>
     <view class='section-name'>
       <text>签名</text>
-      <input style='width:9em;' type='text' value='张 三'></input>
+      <input name='name' style='width:9em;' type='text' value='张 三'></input>
     </view>
 
     <view class='section-share'>
       <text>{{shareStatus ? "别人看" : "就自己看"}}</text>
-      <switch bindchange='changeShareStatus'></switch>
+      <switch checked='{{shareStatus}}' name='isShare' bindchange='changeShareStatus'></switch>
     </view>
     <!-- <view class='block-line'></view> -->
     <button class='submit-button' type="primary" form-type='submit'>保存</button>

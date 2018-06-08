@@ -4,6 +4,9 @@ var sentNotification = require("../../templates/sent_notification_template/sent_
 var allNotification = require("../../templates/all_notification_template/all_notification_template.js");
 var overdueNotification = require("../../templates/overdue_notification_template/overdue_notification_template.js");
 
+var bmobServer = require("../../BmobServer/bmobServer.js");
+var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
+var relation = bmobConfig.relation;
 
 Page({
 
@@ -12,16 +15,20 @@ Page({
    */
   data: {
     moreDetail: false,
-    currentTap: 1
+    currentTap: 1,
+    allMessage: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //模板加载js文件
     this.tapOnSentDetail = sentNotification.tapOnSentDetail;
-    this.tapOnAllDetail  = allNotification.tapOnAllDetail;
+    this.tapOnAllDetail = allNotification.tapOnAllDetail;
     this.tapOnOverdueDetail = overdueNotification.tapOnOverdueDetail;
+
+    // bmobServer.getAllMessageInfo(this.getAllMessageInfoCallback);
   },
 
   /**
@@ -72,12 +79,14 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 展开信息
+
   tapOnNewNotification: function () {
+    var that = this;
     wx.navigateTo({
-      url: '/pages/newNotification/newNotification',
+      url: '/pages/newNotification/newNotification' + '?from=' + that.data.currentTap
     })
   },
+  // 展开信息
   extendNotification: function (e) {
     wx.navigateTo({
       url: "/pages/notificationDetail/notificationDetail",
@@ -97,5 +106,30 @@ Page({
         currentTap: e.currentTarget.dataset.current
       })
     }
+  },
+  getAllMessageInfoCallback(message) {
+
+    var temp = [];
+
+    for (var i = 0; i < message.length; i++) {
+      var eachMeassge = {};
+      eachMeassge.title = message[i].title;
+      eachMeassge.content = message[i].content;
+      eachMeassge.author = message[i].author;
+
+      eachMeassge.date = message[i].time.iso.substr(0, 10);
+      eachMeassge.time = message[i].time.iso.substr(11, 5);
+
+      temp.push(eachMeassge);
+
+    }
+
+
+    this.setData({
+      allMessage: temp
+    });
+
+    console.log(this.data.allMessage);
+
   }
 })

@@ -53,3 +53,11 @@
   background-color: #f7f7f7;
   box-shadow: 0 10rpx 10rpx -5rpx #aaa;
 }
+
+.overdue-noti-title {
+  width: 75%;
+  /* outline: 1px solid red; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

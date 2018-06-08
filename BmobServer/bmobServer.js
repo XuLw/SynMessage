@@ -5,6 +5,7 @@ var userTable = Bmob.Query('myUserTable');
 var messageTable = Bmob.Query('myMessageTable');
 var relationTable = Bmob.Query('myRelationTable');
 
+<<<<<<< HEAD
 // 初始化BmobServer 并通过callback返回用户信息
 var initialize = function(callback,errCallback){
   Bmob.initialize(BmobConfig.bmobKey.AppId, BmobConfig.bmobKey.RestKey);
@@ -22,16 +23,20 @@ var initialize = function(callback,errCallback){
 var getAllUserInfo =function(callback,errCallback)
 {
   userTable.find().then(res=>{
+=======
+var getAllUserInfo = function (callback, errCallback) {
+  userTable.find().then(res => {
+>>>>>>> e9270a2fda47e40a94ed166843059780dd138c07
     console.log(res);
     callback(res);//回掉函数
-  }).catch(err=>{
+  }).catch(err => {
     console.log(err);
     errCallback(err);//错误回调函数
   })
 }
+
 // 得到所有消息信息
-var getAllMessageInfo = function(callback,errCallback)
-{
+var getAllMessageInfo = function (callback, errCallback) {
   messageTable.find().then(res => {
     console.log(res);
     callback(res);//回掉函数
@@ -40,105 +45,114 @@ var getAllMessageInfo = function(callback,errCallback)
     errCallback(err);//错误回调函数
   })
 }
-var getUserInfoById =function(userId,callback,errCallback)
-{
-  userTable.equalTo('userId','==',userId);
-    userTable.find().then(res=>{
-        console.log(res);
-        callBack(res);//回掉函数
-    }
-    ).catch(err=>{
-        console.log(err);
-        errCallback(err);//错误回调函数
-    });
+var getUserInfoById = function (userId, callback, errCallback) {
+  userTable.equalTo('userId', '==', userId);
+  userTable.find().then(res => {
+    console.log(res);
+    callBack(res);//回掉函数
+  }
+  ).catch(err => {
+    console.log(err);
+    errCallback(err);//错误回调函数
+  });
 }
-var getMessageInfoById = function(messageId,callback,errCallback)
-{
+var getMessageInfoById = function (messageId, callback, errCallback) {
   messageTable.equalTo('messageId', '==', messageId)
-    messageTable.find().then(res=>{
-      console.log(res);
-      callback(res);//回掉函数
-    }).catch(err => {
-      console.log(err);
-      errCallback(err);//错误回调函数
-    });
-}
-//如果报错,说明已经存在这名用户的信息存在数据库中
-var addUserInfo = function (userId,name,callback,errCallback)
-{
-    userTable.set("userId", userId);
-    userTable.set("name",name);
-    userTable.save().then(res=>{
-      console.log(res);
-      callback(res);//回掉函数
-    }).catch(err=>{
-      console.log(err);
-      errCallback(err);//错误回调函数
-    })
-}
-// 添加MessageInfo不涉及关联用户,可通过callback另行连接
-var addMessageInfo = function (title, effect,time,content,author,callback,errCallback)
-{
-    messageTable.set("title", title);
-    messageTable.set("effect", effect);
-    messageTable.set("content", content);
-    messageTable.set("author", author);
-    messageTable.set("time",time);
-    messageTable.save().then(res=>{
-      console.log(res);
-      messageTable.equalTo("objectId","==",res.objectId);
-      messageTable.find().then(res=>{
-        console.log(res);
-        callback(res);
-      }).catch(err=>{
-        console.log(err);
-        errCallback(err);
-      })
-    }).catch(err=>{
-      console.log(err);
-      errCallback(err);//错误回调函数
-    })
-}
-// 连接user和message,关系为relation
-var addRelationInfo=function(userId,messageId,relation,concern,callback,errCallback)
-{
-  relationTable.set("userId",userId);
-  relationTable.set("messageId",messageId);
-  relationTable.set("relation",relation);
-  relationTable.set("concern",concern);
-  relationTable.save().then(res=>{
+  messageTable.find().then(res => {
     console.log(res);
     callback(res);//回掉函数
-  }).catch(err=>{
+  }).catch(err => {
+    console.log(err);
+    errCallback(err);//错误回调函数
+  });
+}
+//如果报错,说明已经存在这名用户的信息存在数据库中
+var addUserInfo = function (userId, name, callback, errCallback) {
+  userTable.set("userId", userId);
+  userTable.set("name", name);
+  userTable.save().then(res => {
+    console.log(res);
+    callback(res);//回掉函数
+  }).catch(err => {
+    console.log(err);
+    errCallback(err);//错误回调函数
+  })
+}
+// 添加MessageInfo不涉及关联用户,可通过callback另行连接
+var addMessageInfo = function (title, effect, time, content, author, callback, errCallback) {
+  messageTable.set("title", title);
+  messageTable.set("effect", effect);
+  messageTable.set("content", content);
+  messageTable.set("author", author);
+  messageTable.set("time", time);
+  messageTable.save().then(res => {
+    console.log(res);
+    callback(res);//回掉函数
+  }).catch(err => {
+    console.log(err);
+    errCallback(err);//错误回调函数
+  })
+}
+
+var addMessageInfo = function (title, effect, time, content, author, callback, errCallback) {
+  messageTable.set("title", title);
+  messageTable.set("effect", effect);
+  messageTable.set("content", content);
+  messageTable.set("author", author);
+  messageTable.set("time", time);
+  messageTable.save().then(res => {
+    console.log(res);
+    messageTable.equalTo("objectId", "==", res.objectId);
+    messageTable.find().then(res => {
+      console.log(res);
+      callback(res);
+    }).catch(err => {
+      console.log(err);
+      errCallback(err);
+    })
+  }).catch(err => {
+    console.log(err);
+    errCallback(err);//错误回调函数
+  })
+}
+
+var addRelationInfo = function (userId, messageId, relation, concern, callback, errCallback) {
+  relationTable.set("userId", userId);
+  relationTable.set("messageId", messageId);
+  relationTable.set("relation", relation);
+  relationTable.set("concern", concern);
+  relationTable.save().then(res => {
+    console.log(res);
+    callback(res);//回掉函数
+  }).catch(err => {
     console.log(err);
     errCallback(err);//错误回调函数
   })
 }
 // 通过userId得到与其特定relation的message数组
-var getMessageByUserId=function(userId,relation,callback,errCallback)
-{
-  relationTable.equalTo("userId","==",userId);
-  relationTable.equalTo("relation","==", relation);
-  relationTable.find().then(res=>{
+var getMessageByUserId = function (userId, relation, callback, errCallback) {
+  relationTable.equalTo("userId", "==", userId);
+  relationTable.equalTo("relation", "==", relation);
+  relationTable.find().then(res => {
     console.log(res);
     var messageIdArray = res.map(a => a.messageId);
     console.log(messageIdArray);
-    messageTable.containedIn("messageId",messageIdArray);
+    messageTable.containedIn("messageId", messageIdArray);
     messageTable.order("time");
-    messageTable.find().then(res=>{
-        console.log(res);
-        callback(res);//回掉函数
-    }).catch(err=>{
-        console.log(err);
-        errCallback(err);//错误回调函数
-    })
-  }).catch(err=>{
+    messageTable.find().then(res => {
+      console.log(res);
+      callback(res);//回掉函数
+    }).catch(err => {
       console.log(err);
       errCallback(err);//错误回调函数
+    })
+  }).catch(err => {
+    console.log(err);
+    errCallback(err);//错误回调函数
   })
 }
 // 通过userId得到与其特定relation的且满足messageLimit的message数组
-var getMessageByUserIdWithLimit = function (userId, relation,messageLimit, callback,errCallback){
+var getMessageByUserIdWithLimit = function (userId, relation, messageLimit, callback, errCallback) {
   relationTable.equalTo("userId", "==", userId);
   relationTable.equalTo("relation", "==", relation);
   relationTable.find().then(res => {
@@ -162,25 +176,25 @@ var getMessageByUserIdWithLimit = function (userId, relation,messageLimit, callb
   })
 }
 // 创建messageLimit,传入messageCountLimit为数量限制,messageDateLimit为BmobDate类型的时间限制
-var makeMessageLimit = function (messageCountLimit,messageDateLimit){
+var makeMessageLimit = function (messageCountLimit, messageDateLimit) {
   return {
     countLimit: messageCountLimit,
     dateLimit: messageDateLimit
   }
 }
 // 通过messageId得到与其特点relation的user数组
-var getUserbyMessageId=function(messageId,relation,callback,errCallback){
+var getUserbyMessageId = function (messageId, relation, callback, errCallback) {
   relationTable.equalTo("messageId", "==", messageId);
   relationTable.equalTo("relation", "==", relation);
   relationTable.find().then(res => {
     console.log(res);
-    var userIdArray = res.map(a=>a.userId);
+    var userIdArray = res.map(a => a.userId);
     console.log(userIdArray);
-    userTable.containedIn("userId",userIdArray);
-    userTable.find().then(res=>{
+    userTable.containedIn("userId", userIdArray);
+    userTable.find().then(res => {
       console.log(res);
       callback(res);//回掉函数
-    }).catch(err=>{
+    }).catch(err => {
       console.log(err);
       errCallback(err);//错误回调函数
     })
@@ -190,38 +204,36 @@ var getUserbyMessageId=function(messageId,relation,callback,errCallback){
   })
 }
 //修改指定messageId的message,不修改的选项填写null
-var modifyMessage = function (messageId, title,effect, time, content, author, callback,errCallback)
-{
-    messageTable.equalTo("messageId", "==", messageId);
-    messageTable.find().then(res=>{
-      console.log(res);
-      if(title!=null)
-      res.set("title",title);
-      if(effect!=null)
+var modifyMessage = function (messageId, title, effect, time, content, author, callback, errCallback) {
+  messageTable.equalTo("messageId", "==", messageId);
+  messageTable.find().then(res => {
+    console.log(res);
+    if (title != null)
+      res.set("title", title);
+    if (effect != null)
       res.set("effect", effect);
-      if(content!=null)
+    if (content != null)
       res.set("content", content);
-      if(author!=null)
+    if (author != null)
       res.set("author", author);
-      if(time!=null) 
-      res.set("time",time);
-      res.saveAll().then(res=>{
-        console.log(res);
-        if(callback!=null)
-          callback(res);//回掉函数
-      }).catch(err=>{
-        console.log(err);
-        errCallback(err);//错误回调函数
-      })
-    }).catch(err=>{
+    if (time != null)
+      res.set("time", time);
+    res.saveAll().then(res => {
+      console.log(res);
+      if (callback != null)
+        callback(res);//回掉函数
+    }).catch(err => {
       console.log(err);
       errCallback(err);//错误回调函数
     })
+  }).catch(err => {
+    console.log(err);
+    errCallback(err);//错误回调函数
+  })
 }
 // 传入js中的Date,返回BmobDate
-var translateDateToBmobDate=function(date)
-{
-  return  {
+var translateDateToBmobDate = function (date) {
+  return {
     "__type": "Date",
     "iso": formatDate(date)
   }
@@ -241,8 +253,7 @@ var formatDate = function (date) {
   return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 };
 // 传入BmobDate转换成Date
-var translateBmobDateToDate=function(BmobDate)
-{
+var translateBmobDateToDate = function (BmobDate) {
   return convertDateFromString(BmobDate.iso);
 }
 // 将BmobDate中的日期格式转换成Date日期格式
@@ -255,20 +266,20 @@ function convertDateFromString(dateString) {
   }
 }
 // 修改relation中user对message的concern状态
-var modifyMessageConcern = function(userId,messageId,concern,callback,errCallback){
-  relationTable.equalTo("userId","==",userId);
-  relationTable.equalTo("messageId","==",messageId);
-  relationTable.find().then(res=>{
+var modifyMessageConcern = function (userId, messageId, concern, callback, errCallback) {
+  relationTable.equalTo("userId", "==", userId);
+  relationTable.equalTo("messageId", "==", messageId);
+  relationTable.find().then(res => {
     console.log(res);
     res.set("concern", concern);
-    res.saveAll().then(res=>{
+    res.saveAll().then(res => {
       console.log(res);
       callback(res);
-    }).catch(err=>{
+    }).catch(err => {
       console.log(err);
       errCallback(err);
     })
-  }).catch(err=>{
+  }).catch(err => {
     console.log(err);
     errCallback(err);
   })
@@ -276,8 +287,8 @@ var modifyMessageConcern = function(userId,messageId,concern,callback,errCallbac
 
 exports.modifyMessageConcern = modifyMessageConcern;
 exports.translateBmobDateToDate = translateBmobDateToDate;
-exports.makeMessageLimit=makeMessageLimit;
-exports.getMessageByUserIdWithLimit=getMessageByUserIdWithLimit;
+exports.makeMessageLimit = makeMessageLimit;
+exports.getMessageByUserIdWithLimit = getMessageByUserIdWithLimit;
 exports.translateDateToBmobDate = translateDateToBmobDate;
 exports.modifyMessage = modifyMessage;
 exports.getUserbyMessageId = getUserbyMessageId;
