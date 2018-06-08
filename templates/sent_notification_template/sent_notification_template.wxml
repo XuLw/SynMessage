@@ -1,20 +1,20 @@
 <template name="sentNotificationTemplate">
-    <view class='sent-notification-container' catchtap="tapOnSentDetail">
-      <view class='sent-noti-time-container'>
-        <text>2018-5-4</text>
-        <text>00:00</text>
-      </view>
-      <view class='sent-noti-body-container'>
-        <view class='sent-noti-body'>
-          <view class='sent-title-container'>
-            <text> 通知的标题通知的标题通知的标题通知的标题通知的标题通 </text>
-          </view>
-          <view class='sent-read'>
-            <image mode='scaleToFill' style='height:40rpx;width:40rpx; margin-left:20rpx;' src='/images/eye.png'></image>
-            <text style='margin-right:20rpx;'>32</text>
-          </view>
+  <view class='sent-notification-container' catchtap="tapOnSentDetail">
+    <view class='sent-noti-time-container'>
+      <text>{{date}}</text>
+      <text>{{time}}</text>
+    </view>
+    <view class='sent-noti-body-container'>
+      <view class='sent-noti-body'>
+        <view class='sent-title-container'>
+          <text> {{title}} </text>
+        </view>
+        <view class='sent-read'>
+          <image mode='scaleToFill' style='height:40rpx;width:40rpx; margin-left:20rpx;' src='/images/eye.png'></image>
+          <text style='margin-right:20rpx;'>32</text>
         </view>
       </view>
     </view>
-    
+  </view>
+
 </template>

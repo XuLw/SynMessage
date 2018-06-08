@@ -19,13 +19,15 @@
     <swiper-item>
       <!-- 自己发送的通知的显示  -->
       <scroll-view scroll-y class='body-container'>
-        <template is="sentNotificationTemplate"></template>
+        <block wx:for="{{_sentNotification}}" wx:key="{{item}}">
+          <template is="sentNotificationTemplate" data="{{...item}}"></template>
+        </block>
       </scroll-view>
     </swiper-item>
     <swiper-item>
       <!--全部的通知  -->
       <scroll-view scroll-y class='body-container'>
-        <block wx:for="{{allMessage}}" wx:key="{{item}}">
+        <block wx:for="{{_receivedNotification}}" wx:key="{{item}}">
           <template is="allNotificationTemplate" data="{{...item}}"></template>
         </block>
       </scroll-view>
@@ -33,7 +35,9 @@
     <swiper-item>
       <!--过期的通知  -->
       <scroll-view scroll-y class='body-container'>
-        <template is="overdueNotificationTemplate"></template>
+        <block wx:for="{{_overdueNotification}}" wx:key="{{item}}">
+          <template is="overdueNotificationTemplate" data="{{...item}}"></template>
+        </block>
       </scroll-view>
     </swiper-item>
   </swiper>

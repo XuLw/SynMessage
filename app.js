@@ -11,5 +11,8 @@ App({
   globalData: {
     userInfo: null
   },
-  userId: "2"
+  userId: "2",
+  sentMessage: [],
+  receivedMessage: [],
+  overdueMessage: []
 })

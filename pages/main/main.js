@@ -8,8 +8,13 @@ var bmobServer = require("../../BmobServer/bmobServer.js");
 var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
 var relation = bmobConfig.relation;
 
+var app = getApp();
 
 var userId = getApp().userId;
+
+var allMessages = [];
+
+var today = new Date();
 
 Page({
 
@@ -19,11 +24,11 @@ Page({
   data: {
     moreDetail: false,
     currentTap: 1,
-    personalMessage: [],
-    publicMessage: [],
-    receivedMessage: []
-
+    _sentNotification: [],
+    _receivedNotification: [],
+    _overDueNotification: []
   },
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -35,6 +40,8 @@ Page({
     this.tapOnOverdueDetail = overdueNotification.tapOnOverdueDetail;
 
     // bmobServer.getAllMessageInfo(this.getAllMessageInfoCallback);
+
+    //获取当前时间
     wx.showToast({
       title: '加载中',
       duration: 5000,
@@ -141,27 +148,78 @@ Page({
     });
     console.log(this.data.allMessage);
   },
-  getMessageCallback(message) {
-    this.setData({
-      publicMessage: message
-    });
+  publicMessageCallback(message) {
+
+    allMessages = allMessages.concat(message);
+    console.log(message)
+
+    today.setSeconds(0);
+
+    for (var i = 0; i < message.length; i++) {
+      //转换为js里面的Date
+      var date = bmobServer.translateBmobDateToDate(message[i].time);
+      if (date > today && message[i].effect === true) {
+        //消息有效
+        message[i].date = message[i].time.iso.substr(0, 10);
+        message[i].time = message[i].time.iso.substr(11, 5);
+        app.sentMessage.push(message[i]);
+      } else {
+        message[i].date = message[i].time.iso.substr(0, 10);
+        message[i].time = message[i].time.iso.substr(11, 5);
+        app.overdueMessage.push(message[i]);
+      }
+    }
 
     bmobServer.getMessageByUserId(userId, relation.AsReceiver, this.receivedMessageCallback, null);
 
   },
   receivedMessageCallback(message) {
-    // console.log(message);
-    this.setData({
-      receivedMessage: message
-    });
+
+    allMessages = allMessages.concat(message);
+
+    for (var i = 0; i < message.length; i++) {
+      //转换为js里面的Date
+      var date = bmobServer.translateBmobDateToDate(message[i].time);
+      if (date > today && message[i].effect === true) {
+        //消息有效
+        message[i].date = message[i].time.iso.substr(0, 10);
+        message[i].time = message[i].time.iso.substr(11, 5);
+        app.receivedMessage.push(message[i]);
+      } else {
+        message[i].date = message[i].time.iso.substr(0, 10);
+        message[i].time = message[i].time.iso.substr(11, 5);
+        app.overdueMessage.push(message[i]);
+      }
+    }
 
     bmobServer.getMessageByUserId(userId, relation.AsPersonal, this.personalMessageCallback, null);
 
   },
   personalMessageCallback(message) {
+
+    allMessages = allMessages.concat(message);
+
+    for (var i = 0; i < message.length; i++) {
+      //转换为js里面的Date
+      var date = bmobServer.translateBmobDateToDate(message[i].time);
+      if (date > today && message[i].effect === true) {
+        //消息有效
+        message[i].date = message[i].time.iso.substr(0, 10);
+        message[i].time = message[i].time.iso.substr(11, 5);
+        app.receivedMessage.push(message[i]);
+      } else {
+        message[i].date = message[i].time.iso.substr(0, 10);
+        message[i].time = message[i].time.iso.substr(11, 5);
+        app.overdueMessage.push(message[i]);
+      }
+    }
+
     this.setData({
-      personalMessage: message
-    });
+      _sentNotification: app.sentMessage,
+      _receivedNotification: app.receivedMessage,
+      _overdueNotification: app.overdueMessage,
+    })
+
     wx.hideToast();
   }
 
