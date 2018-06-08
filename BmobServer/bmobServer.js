@@ -1,12 +1,27 @@
 
 var Bmob = require('../utils/Bmob-1.4.4.min.js');
-
+var BmobConfig = require('./bmobServerConfig.js');
 var userTable = Bmob.Query('myUserTable');
 var messageTable = Bmob.Query('myMessageTable');
 var relationTable = Bmob.Query('myRelationTable');
 
-var getAllUserInfo = function (callback, errCallback) {
-  userTable.find().then(res => {
+// 初始化BmobServer 并通过callback返回用户信息
+var initialize = function(callback,errCallback){
+  Bmob.initialize(BmobConfig.bmobKey.AppId, BmobConfig.bmobKey.RestKey);
+  Bmob.User.auth().then(res => {
+    console.log(res)
+    console.log('一键登陆成功')
+    callback(res);
+  }).catch(err => {
+    console.log(err)
+    errCallback(err);
+  });
+}
+
+// 得到所有用户信息
+var getAllUserInfo =function(callback,errCallback)
+{
+  userTable.find().then(res=>{
     console.log(res);
     callback(res);//回掉函数
   }).catch(err => {
