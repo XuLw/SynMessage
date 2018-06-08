@@ -1,9 +1,23 @@
 # SynMessage
 更方便的管理通知
 
+## BmobServer 初始化方法 李伟港
+1. 配置BmobServer中的bmobkey
+2. 引入bmobServer
+```javascript
+var bmobServer = require("../../BmobServer/bmobServer.js");
+```
+3. 传入回调函数接受用户信息
 
+实例:
+```javascript 
+//初始化
+const BmobServer = require('./BmobServer/bmobServer.js')
+BmobServer.initialize(null,null);
+```
 
-# BmobServer 使用方式 李伟港
+## BmobServer 使用方式 李伟港
+对于需要调用BmobServer内函数的需要一下操作
 ```javascript
 var bmobServer = require("../../BmobServer/bmobServer.js");
 var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
