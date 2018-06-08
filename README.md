@@ -2,11 +2,19 @@
 更方便的管理通知
 
 
+
 # BmobServer 使用方式 李伟港
 ```javascript
 var bmobServer = require("../../BmobServer/bmobServer.js");
 var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
 var relation = bmobConfig.relation;
+```
+## 2018.6.8 BmobDate转Date 李伟港
+```javascript
+    var date = new Date(2020,2,3,10,0,0);
+    var bmobDate = bmobServer.translateDateToBmobDate(date);
+    //将BmobDate转换成Date
+    var dateR = bmobServer.translateBmobDateToDate(bmobDate);
 ```
 
 ## 2018.6.7 李伟港
