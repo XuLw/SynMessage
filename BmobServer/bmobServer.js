@@ -279,7 +279,7 @@ var modifyMessageConcern = function (userId, messageId, concern, callback, errCa
     errCallback(err);
   })
 }
-
+exports.initialize = initialize;
 exports.modifyMessageConcern = modifyMessageConcern;
 exports.translateBmobDateToDate = translateBmobDateToDate;
 exports.makeMessageLimit = makeMessageLimit;
