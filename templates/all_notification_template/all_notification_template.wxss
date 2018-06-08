@@ -45,7 +45,7 @@
   height: 90%;
   width: 90%;
   display: flex;
-  padding-left: 1em;
+  padding-left: 0.6em;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -54,10 +54,21 @@
   box-shadow: 0 10rpx 10rpx -5rpx #aaa;
 }
 
-.all-noti-author {
-  max-width: 4em;
-  margin-right: 0.7em;
+.all-noti-title {
   overflow: hidden;
-  font-size: 0.9em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 68%;
+  /* outline: 1px solid red; */
+}
+
+.all-noti-author {
+  width: 25%;
+  /* outline: 1px solid red; */
+  margin-right: 0.7em;
+  font-size: 0.9rem;
   color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

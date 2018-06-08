@@ -1,4 +1,9 @@
 // pages/newNotification/newNotification.js
+
+var bmobServer = require("../../BmobServer/bmobServer.js");
+var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
+var relation = bmobConfig.relation;
+
 Page({
 
   /**
@@ -70,7 +75,17 @@ Page({
 
   },
   submit: function (e) {
-
+    var v = e.detail.value;
+    var title = v.title;
+    var content = v.content;
+    var deadlineDate = v.deadlineDate;
+    var deadlineTime = v.deadlineTime;
+    var dateTime = new Date(deadlineDate + " " + deadlineTime);
+    dateTime.setSeconds(1);
+    var bmobDate = bmobServer.makeBmobDate(dateTime);
+    var name = v.name;
+    var isShare = v.isShare;
+    bmobServer.addMessageInfo(title, true, bmobDate, content, name, this.addMessageInfoCallback);
   },
   selectDate: function (e) {
     this.setData({
@@ -86,5 +101,8 @@ Page({
     this.setData({
       shareStatus: e.detail.value
     })
+  },
+  addMessageInfoCallback(message) {
+    console.log(message);
   }
 })

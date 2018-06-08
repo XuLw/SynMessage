@@ -7,7 +7,7 @@
       </view>
       <view class='overdue-noti-body-container'>
         <view class='overdue-noti-body'>
-          <text> 通知的标题 </text>
+          <text class='overdue-noti-title'> 通知的标题通知的标题通知的标题通知的标题通知的标题 </text>
           <image style='height:50rpx;width:50rpx;margin-right:16rpx;' mode="scaleToFill" src='/images/more.png'></image>
         </view>
       </view>

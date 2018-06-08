@@ -1,14 +1,13 @@
 {
   "pages": [
-    "pages/bmobDemo/bmobDemo",
     "pages/main/main",
     "pages/newNotification/newNotification",
     "pages/sentNotificationDetail/sentNotificationDetail",
     "pages/editNotification/editNotification",
     "pages/notificationDetail/notificationDetail",
     "pages/index/index",
-    "pages/overdueNotificationDetail/overdueNotificationDetail"
-    
+    "pages/overdueNotificationDetail/overdueNotificationDetail",
+    "pages/bmobDemo/bmobDemo"
   ],
   "window": {
     "backgroundTextStyle": "light",
