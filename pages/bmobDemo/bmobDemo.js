@@ -44,18 +44,18 @@ Page({
     //bmobServer.addMessageInfo("title", true,bmobDate, "新添加的通知的内容", "李维刚", callback,null);
 
     //添加user和message关系
-    //参数:userId,messageId,relation,callback,errCallback
+    //参数:userId,messageId,relation,concern,callback,errCallback
     //relation为bmobServerConfig.js中定义类型
     //relation.AsPersonal:个人消息
     //relation.AsReceiver:接受消息
     //relation.AsPublisher:发布消息
-    //bmobServer.addRelationInfo("2", 3, relation.AsPersonal,callback,null);
-    //bmobServer.addRelationInfo("2", 1, relation.AsReceiver,callback,null);
-    //bmobServer.addRelationInfo("5", 2, relation.AsReceiver,callback,null);
-    //bmobServer.addRelationInfo("5", 1, relation.AsPublisher,callback,null);
-    //bmobServer.addRelationInfo("5", 3, relation.AsPublisher,null,null);
-    //bmobServer.addRelationInfo("5", 8, relation.AsPublisher, null,null);
-    //bmobServer.addRelationInfo("5", 5, relation.AsPublisher, null,null);
+    //bmobServer.addRelationInfo("2", 3, relation.AsPersonal,true,callback,null);
+    //bmobServer.addRelationInfo("2", 1, relation.AsReceiver,true,callback,null);
+    //bmobServer.addRelationInfo("5", 2, relation.AsReceiver,true,callback,null);
+    //bmobServer.addRelationInfo("5", 1, relation.AsPublisher,true,callback,null);
+    //bmobServer.addRelationInfo("5", 3, relation.AsPublisher,true,null,null);
+    //bmobServer.addRelationInfo("5", 8, relation.AsPublisher,true, null,null);
+    //bmobServer.addRelationInfo("5", 5, relation.AsPublisher,true, null,null);
 
 
     //通过userId和relation查找对应的message
@@ -80,6 +80,9 @@ Page({
     // var date = new Date(2020,2,3,10,0,0);
     // var bmobDate = bmobServer.translateDateToBmobDate(date);
     // var dateR = bmobServer.translateBmobDateToDate(bmobDate);
+
+    //修改user与messag之间的关注
+    // bmobServer.modifyMessageConcern("5",5,true,null,null);
   },
 
   /**

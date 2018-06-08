@@ -19,7 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.from)
+    // console.log(options.from)
     if (options.from == 0) {
       this.setData({
         shareStatus: true
@@ -90,7 +90,9 @@ Page({
     var bmobDate = bmobServer.makeBmobDate(dateTime);
     var name = v.name;
     var isShare = v.isShare;
+
     bmobServer.addMessageInfo(title, true, bmobDate, content, name, this.addMessageInfoCallback);
+
   },
   selectDate: function (e) {
     this.setData({
@@ -108,6 +110,11 @@ Page({
     })
   },
   addMessageInfoCallback(message) {
+    console.log(message);
+
+    // bmobServer.addRelationInfo("2", 3, relation.AsPersonal, this.addRelationInfo, );
+  },
+  addRelationInfoCallback(message) {
     console.log(message);
   }
 })

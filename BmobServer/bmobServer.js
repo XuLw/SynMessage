@@ -14,6 +14,8 @@ var getAllUserInfo = function (callback, errCallback) {
     errCallback(err);//错误回调函数
   })
 }
+
+// 得到所有消息信息
 var getAllMessageInfo = function (callback, errCallback) {
   messageTable.find().then(res => {
     console.log(res);
@@ -71,11 +73,34 @@ var addMessageInfo = function (title, effect, time, content, author, callback, e
     errCallback(err);//错误回调函数
   })
 }
-// 连接user和message,关系为relation
-var addRelationInfo = function (userId, messageId, relation, callback, errCallback) {
+
+var addMessageInfo = function (title, effect, time, content, author, callback, errCallback) {
+  messageTable.set("title", title);
+  messageTable.set("effect", effect);
+  messageTable.set("content", content);
+  messageTable.set("author", author);
+  messageTable.set("time", time);
+  messageTable.save().then(res => {
+    console.log(res);
+    messageTable.equalTo("objectId", "==", res.objectId);
+    messageTable.find().then(res => {
+      console.log(res);
+      callback(res);
+    }).catch(err => {
+      console.log(err);
+      errCallback(err);
+    })
+  }).catch(err => {
+    console.log(err);
+    errCallback(err);//错误回调函数
+  })
+}
+
+var addRelationInfo = function (userId, messageId, relation, concern, callback, errCallback) {
   relationTable.set("userId", userId);
   relationTable.set("messageId", messageId);
   relationTable.set("relation", relation);
+  relationTable.set("concern", concern);
   relationTable.save().then(res => {
     console.log(res);
     callback(res);//回掉函数
@@ -220,7 +245,27 @@ function convertDateFromString(dateString) {
     return date;
   }
 }
+// 修改relation中user对message的concern状态
+var modifyMessageConcern = function (userId, messageId, concern, callback, errCallback) {
+  relationTable.equalTo("userId", "==", userId);
+  relationTable.equalTo("messageId", "==", messageId);
+  relationTable.find().then(res => {
+    console.log(res);
+    res.set("concern", concern);
+    res.saveAll().then(res => {
+      console.log(res);
+      callback(res);
+    }).catch(err => {
+      console.log(err);
+      errCallback(err);
+    })
+  }).catch(err => {
+    console.log(err);
+    errCallback(err);
+  })
+}
 
+exports.modifyMessageConcern = modifyMessageConcern;
 exports.translateBmobDateToDate = translateBmobDateToDate;
 exports.makeMessageLimit = makeMessageLimit;
 exports.getMessageByUserIdWithLimit = getMessageByUserIdWithLimit;
