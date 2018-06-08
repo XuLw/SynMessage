@@ -9,6 +9,25 @@ var bmobServer = require("../../BmobServer/bmobServer.js");
 var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
 var relation = bmobConfig.relation;
 ```
+
+## 2018.6.8 user与message的concern 李伟港
+数据库 myRelationTable添加concern字段
+concern字段表示user对message的关注状态(true为关注,false为不关注)
+
+如果user与message是relation.AsPublisher关系,则这个user对于message的不关注意味着message失效
+(对于这种情况尚未对myMessageTable中的effect进行修改).
+
+```javascript
+//修改user与messag之间的关注
+// bmobServer.modifyMessageConcern("5",5,true,null,null);
+```
+对于之前的函数亦有修改:
+```javaScript
+//原来的创建Relation的方法
+bmobServer.addRelationInfo("2", 3, relation.AsPersonal,callback,null);
+//修改后的创建Relation的方法(增加concern参数)
+bmobServer.addRelationInfo("2", 3, relation.AsPersonal,true,callback,null);
+```
 ## 2018.6.8 BmobDate转Date 李伟港
 ```javascript
     var date = new Date(2020,2,3,10,0,0);
