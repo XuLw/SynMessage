@@ -1,6 +1,8 @@
 # SynMessage
 更方便的管理通知
 
+## 2018.6.9 Concern的修改与effect关联 李伟港
+modifyMessageConcern函数添加了修改对应的message的effect的功能,对于publisher与message的concern会反映到effect,而personal和receiver则不会影响message的effect字段.
 ## BmobServer 初始化方法 李伟港
 1. 配置BmobServer中的bmobkey
 2. 引入bmobServer
