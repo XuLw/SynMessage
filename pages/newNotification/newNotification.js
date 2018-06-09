@@ -128,7 +128,6 @@ Page({
     bmobServer.addRelationInfo("2", message[0].messageId, mRelation, true, this.addRelationInfoCallback, this.addRelationInfoErrCallback);
   },
   addRelationInfoCallback(message) {
-    console.log(message);
     console.log("上传关系成功！");
     wx.hideToast();
     wx.showToast({
@@ -136,7 +135,7 @@ Page({
       duration: 1000,
       icon: "success"
     })
-    
+
   },
   addRelationInfoErrCallback(message) {
     console.log(message);

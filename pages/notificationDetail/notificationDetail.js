@@ -1,4 +1,8 @@
 // pages/notificationDetail/notificationDetail.js
+var bmobServer = require("../../BmobServer/bmobServer.js");
+var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
+var relation = bmobConfig.relation;
+
 var app = getApp();
 
 Page({
@@ -7,7 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    mMessage: {}
+    mMessage: {},
+    indexOfMessage: 0
   },
 
   /**
@@ -15,6 +20,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
+      indexOfMessage: options.id,
       mMessage: app.receivedMessage[options.id]
     })
   },
@@ -66,5 +72,40 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  cancelMessage: function () {
+    //通过修改关系表concern
+    wx.showToast({
+      title: '删除中',
+      icon: 'loading',
+      duration: 5000
+    })
+    this.cancelMessageCallback();
+    bmobServer.modifyMessageConcern(app.userId, this.data.mMessage.messageId, false, this.cancelMessageCallback, null)
+
+  },
+  cancelMessageCallback(message) {
+
+    //更新本地
+    app.overdueMessage.unshift(app.receivedMessage.splice(this.data.indexOfMessage, 1)[0]);
+
+    wx.hideToast();
+    wx.showToast({
+      title: '删除成功',
+      icon: "success",
+      duration: 1000
+    })
+
+    wx.navigateBack({
+    })
+    
+  },
+  cancelMessageErrCallback(message) {
+    wx.hideToast();
+    wx.showToast({
+      title: '网络出错',
+      icon: 'none',
+      duration: 1000
+    })
   }
 })

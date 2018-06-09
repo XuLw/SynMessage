@@ -59,7 +59,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      _sentNotification: app.sentMessage,
+      _receivedNotification: app.receivedMessage,
+      _overdueNotification: app.overdueMessage,
+    })
   },
 
   /**
@@ -135,11 +139,11 @@ Page({
         //消息有效
         message[i].date = message[i].time.iso.substr(0, 10);
         message[i].time = message[i].time.iso.substr(11, 5);
-        app.sentMessage.push(message[i]);
+        app.sentMessage.unshift(message[i]);
       } else {
-        message[i].date = message[i].time.iso.substr(0, 10);
-        message[i].time = message[i].time.iso.substr(11, 5);
-        app.overdueMessage.push(message[i]);
+        // message[i].date = message[i].time.iso.substr(0, 10);
+        // message[i].time = message[i].time.iso.substr(11, 5);
+        // app.overdueMessage.unshift(message[i]);
       }
     }
 
@@ -155,11 +159,11 @@ Page({
         //消息有效
         message[i].date = message[i].time.iso.substr(0, 10);
         message[i].time = message[i].time.iso.substr(11, 5);
-        app.receivedMessage.push(message[i]);
+        app.receivedMessage.unshift(message[i]);
       } else {
         message[i].date = message[i].time.iso.substr(0, 10);
         message[i].time = message[i].time.iso.substr(11, 5);
-        app.overdueMessage.push(message[i]);
+        app.overdueMessage.unshift(message[i]);
       }
     }
 
@@ -175,11 +179,11 @@ Page({
         //消息有效
         message[i].date = message[i].time.iso.substr(0, 10);
         message[i].time = message[i].time.iso.substr(11, 5);
-        app.receivedMessage.push(message[i]);
+        app.receivedMessage.unshift(message[i]);
       } else {
         message[i].date = message[i].time.iso.substr(0, 10);
         message[i].time = message[i].time.iso.substr(11, 5);
-        app.overdueMessage.push(message[i]);
+        app.overdueMessage.unshift(message[i]);
       }
     }
 
@@ -189,6 +193,7 @@ Page({
       _overdueNotification: app.overdueMessage,
     })
 
+    console.log(app.sentMessage)
     wx.hideToast();
   }
 

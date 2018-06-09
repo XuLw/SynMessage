@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    mMessage: {}
+    mMessage: {},
+    indexOfMessage: 0
   },
 
   /**
@@ -15,6 +16,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
+      indexOfMessage: options.id,
       mMessage: app.overdueMessage[options.id]
     })
   },
