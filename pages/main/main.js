@@ -10,9 +10,6 @@ var bmobServer = require("../../BmobServer/bmobServer.js");
 var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
 var relation = bmobConfig.relation;
 
-var app = getApp();
-
-var userId = app.userId;
 var today = new Date();
 
 Page({
@@ -38,13 +35,16 @@ Page({
     this.tapOnAllDetail = allNotification.tapOnAllDetail;
     this.tapOnOverdueDetail = overdueNotification.tapOnOverdueDetail;
 
+    wx.hideToast();
+
     wx.showToast({
       title: '加载中',
       duration: 5000,
       icon: "loading"
     })
 
-    bmobServer.getMessageByUserId(userId, relation.AsPublisher, true, this.publicMessageCallback, this.errCallback);
+    bmobServer.initialize(this.UserInfoCallback, this.UserInfoErrCallback);
+
   },
 
   /**
@@ -63,6 +63,7 @@ Page({
       _receivedNotification: globalData.receivedMessage,
       _overdueNotification: globalData.overdueMessage,
     })
+
   },
 
   /**
@@ -103,8 +104,8 @@ Page({
     return {
       title: '你收到了一条通知',
       path: '/pages/index/index?id=123',
-      success:function (res){
-        
+      success: function (res) {
+
       }
     }
   },
@@ -136,8 +137,12 @@ Page({
       })
     }
   },
+  UserInfoCallback(message) {
+    getApp().userId = message.authData.weapp.openid;
+    console.log(getApp().userId)
+    bmobServer.getMessageByUserId(getApp().userId, relation.AsPublisher, true, this.publicMessageCallback, this.errCallback);
+  },
   publicMessageCallback(message) {
-
     today.setSeconds(0);
     for (var i = 0; i < message.length; i++) {
       //转换为js里面的Date
@@ -155,7 +160,7 @@ Page({
         globalData.overdueMessage.unshift(message[i]);
       }
     }
-    bmobServer.getMessageByUserId(userId, relation.AsReceiver, true, this.receivedMessageCallback, this.errCallback);
+    bmobServer.getMessageByUserId(getApp().userId, relation.AsReceiver, true, this.receivedMessageCallback, this.errCallback);
   },
   receivedMessageCallback: function (message) {
 
@@ -176,14 +181,14 @@ Page({
       }
     }
 
-    bmobServer.getMessageByUserId(userId, relation.AsReceiver, false, this.receivedMessageCallback1, this.errCallback);
+    bmobServer.getMessageByUserId(getApp().userId, relation.AsReceiver, false, this.receivedMessageCallback1, this.errCallback);
 
   },
   receivedMessageCallback1(message) {
     //不再关注 都为无效
     globalData.overdueMessage = globalData.overdueMessage.concat(message);
 
-    bmobServer.getMessageByUserId(userId, relation.AsPersonal, true, this.personalMessageCallback, this.errCallback);
+    bmobServer.getMessageByUserId(getApp().userId, relation.AsPersonal, true, this.personalMessageCallback, this.errCallback);
   },
   personalMessageCallback(message) {
 
@@ -209,11 +214,15 @@ Page({
       _receivedNotification: globalData.receivedMessage,
       _overdueNotification: globalData.overdueMessage,
     })
+
     wx.hideToast();
 
   },
   errCallback(message) {
     console.log(message)
-  }
+  },
 
+  UserInfoErrCallback(message) {
+    console.log(message)
+  }
 })

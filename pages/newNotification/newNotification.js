@@ -18,6 +18,7 @@ Page({
   data: {
     curDate: '',
     curTime: '',
+    name: "",
     shareStatus: false
   },
 
@@ -26,6 +27,11 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options.from)
+
+    this.setData({
+      name: getApp().userName
+    })
+
     if (options.from == 0) {
       this.setData({
         shareStatus: true
@@ -145,7 +151,7 @@ Page({
     console.log(globalData.sentMessage)
 
     // 添加关系
-    bmobServer.addRelationInfo("2", message[0].messageId, mRelation, true, this.addRelationInfoCallback, this.addRelationInfoErrCallback);
+    bmobServer.addRelationInfo(getApp().userId, message[0].messageId, mRelation, true, this.addRelationInfoCallback, this.addRelationInfoErrCallback);
   },
   addRelationInfoCallback(message) {
     console.log("上传关系成功！");

@@ -20,11 +20,11 @@
     </view>
     <view class='section-name'>
       <text>签名</text>
-      <input name='name' style='width:9em;' type='text' value='张 三'></input>
+      <input name='name' style='width:9em;' type='text' value='{{name}}'></input>
     </view>
 
     <view class='section-share'>
-      <text>{{shareStatus ? "别人看" : "就自己看"}}</text>
+      <text>公开</text>
       <switch checked='{{shareStatus}}' name='isShare' bindchange='changeShareStatus'></switch>
     </view>
     <!-- <view class='block-line'></view> -->
