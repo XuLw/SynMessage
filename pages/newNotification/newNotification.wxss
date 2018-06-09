@@ -52,7 +52,7 @@ page {
 }
 
 .deadline {
-  width: 44%;
+  width: 46%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

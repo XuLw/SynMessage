@@ -1,6 +1,5 @@
 //index.js
-//获取应用实例
-const app = getApp()
+const BmobServer = require('../../BmobServer/bmobServer.js')
 
 Page({
   data: {
@@ -9,41 +8,53 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  //事件处理函数
-
   onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+
+  },
+  bindGetUserInfo: function (e) {
+    console.log(e.detail.userInfo)
+    if (e.detail.userInfo) {
+      //用户按了允许授权按钮  将信息存到本地
+
+      wx.showToast({
+        title: '加载中',
+        duration: 5000,
+        icon: "loading"
       })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
+
+      getApp().userName = e.detail.userInfo.nickName;
+
+      BmobServer.initialize(this.userInfoCallback, null);
+
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
+      //用户按了拒绝按钮
+      wx.showToast({
+        title: '授权才能使用噢~',
+        icon: "none",
+        duration: 1000
       })
     }
   },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    wx.navigateTo({
-      url: '/pages/main/main',
+  userInfoCallback(message) {
+    //已有用户不进行重复床关键
+    getApp().userId = message.authData.weapp.openid;
+    BmobServer.getUserInfoById(getApp().userId, this.checkCallback, this.checkErrCallback)
+  },
+  checkCallback(message) {
+    wx.hideToast();
+    wx.redirectTo({
+      url: '../main/main',
+    })
+    console.log(message)
+  },
+  checkErrCallback(message) {
+    //没有则进行注册
+    // console.log(message)
+    BmobServer.addUserInfo(message.authData.weapp.openid, getApp().userName, this.addUserCallback, null);
+  },
+  addUserCallback(message) {
+    wx.redirectTo({
+      url: '../main/main',
     })
   }
 })

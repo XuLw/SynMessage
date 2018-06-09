@@ -10,6 +10,14 @@ const dateToBDate = function (dateTime) {
   }
 }
 
+var showLoadingToast = function (title) {
+  wx.showToast({
+    title: title,
+    duration: 5000,
+    icon: "loading"
+  })
+}
+
 // const userId = "2";
 
 // var that;
@@ -111,4 +119,5 @@ const dateToBDate = function (dateTime) {
 // }
 
 exports.dateToBDate = dateToBDate;
+exports.showLoadingToast = showLoadingToast;
 // exports.initData = initData;

@@ -7,7 +7,7 @@ var relationTable = Bmob.Query('myRelationTable');
 
 // 初始化BmobServer 并通过callback返回用户信息
 var initialize = function (callback, errCallback) {
-  Bmob.initialize(BmobConfig.bmobKey.AppId, BmobConfig.bmobKey.RestKey);
+  
   Bmob.User.auth().then(res => {
 
     console.log('一键登陆成功')
