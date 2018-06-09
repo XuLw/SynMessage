@@ -5,6 +5,10 @@ var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
 var relation = bmobConfig.relation;
 
 var utils = require("../../utils/util.js");
+var globalData = require("../../utils/data.js").globalData;
+
+
+var app = getApp();
 
 Page({
 
@@ -122,21 +126,40 @@ Page({
     })
   },
   addMessageInfoCallback(message) {
+
+    var mRelation = this.data.shareStatus ? relation.AsPublisher : relation.AsPersonal;
+
     console.log("上传通知成功！")
     console.log(message[0].messageId);
-    var mRelation = this.data.shareStatus ? relation.AsPublisher : relation.AsPersonal;
+    var tMessage = message[0];
+    tMessage.date = tMessage.time.iso.substr(0, 10);
+    tMessage.time = tMessage.time.iso.substr(11, 5);
+    tMessage.state = mRelation;
+
+    //更新本地
+    if (this.data.shareStatus) {
+      globalData.sentMessage.unshift(tMessage);
+    } else {
+      globalData.receivedMessage.unshift(tMessage);
+    }
+    console.log(globalData.sentMessage)
+
+    // 添加关系
     bmobServer.addRelationInfo("2", message[0].messageId, mRelation, true, this.addRelationInfoCallback, this.addRelationInfoErrCallback);
   },
   addRelationInfoCallback(message) {
-    console.log(message);
     console.log("上传关系成功！");
     wx.hideToast();
     wx.showToast({
       title: '上传成功！',
       duration: 1000,
-      icon: "success"
+      icon: "success",
+      complete: function () {
+        wx.navigateBack({
+        })
+      }
     })
-    
+
   },
   addRelationInfoErrCallback(message) {
     console.log(message);

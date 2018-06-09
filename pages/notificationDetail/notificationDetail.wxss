@@ -63,7 +63,7 @@ page {
   background-color: #b6d7a8;
 }
 
-.button-cancle {
+.button-cancel {
   width: 90%;
   background-color: red;
   position: fixed;
@@ -73,7 +73,7 @@ page {
   color: white;
 }
 
-.button-cancle-down {
+.button-cancel-down {
   width: 90%;
   background-color: #c00;
   position: fixed;

@@ -1,5 +1,7 @@
 // pages/overdueNotificationDetail/overdueNotificationDetail.js
 var app = getApp();
+var globalData = require("../../utils/data.js").globalData;
+
 
 Page({
 
@@ -7,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    mMessage: {}
+    mMessage: {},
+    indexOfMessage: 0
   },
 
   /**
@@ -15,7 +18,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      mMessage: app.overdueMessage[options.id]
+      indexOfMessage: options.id,
+      mMessage: globalData.overdueMessage[options.id]
     })
   },
 
