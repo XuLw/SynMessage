@@ -3,6 +3,8 @@ var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
 var relation = bmobConfig.relation;
 
 var app = getApp();
+var globalData = require("../../utils/data.js").globalData;
+
 
 Page({
 
@@ -20,7 +22,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       indexOfMessage: options.id,
-      mMessage: app.sentMessage[options.id]
+      mMessage: globalData.sentMessage[options.id]
     })
   },
 
@@ -36,7 +38,7 @@ Page({
    */
   onShow: function () {
     this.setData({
-      mMessage: app.sentMessage[this.data.indexOfMessage]
+      mMessage: globalData.sentMessage[this.data.indexOfMessage]
     })
   },
 
@@ -92,7 +94,7 @@ Page({
   cancelNotificationCallback(message) {
 
     //更新本地
-    app.sentMessage.splice(this.data.indexOfMessage, 1);
+    globalData.overdueMessage.unshift(globalData.sentMessage.splice(this.data.indexOfMessage, 1)[0]);
 
     wx.hideToast();
     wx.showToast({

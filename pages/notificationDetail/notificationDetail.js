@@ -4,6 +4,8 @@ var bmobConfig = require("../../BmobServer/bmobServerConfig.js");
 var relation = bmobConfig.relation;
 
 var app = getApp();
+var globalData = require("../../utils/data.js").globalData;
+
 
 Page({
 
@@ -21,7 +23,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       indexOfMessage: options.id,
-      mMessage: app.receivedMessage[options.id]
+      mMessage: globalData.receivedMessage[options.id]
     })
   },
 
@@ -80,14 +82,21 @@ Page({
       icon: 'loading',
       duration: 5000
     })
-    this.cancelMessageCallback();
-    bmobServer.modifyMessageConcern(app.userId, this.data.mMessage.messageId, false, this.cancelMessageCallback, null)
+
+    if (this.data.mMessage.state === relation.AsReceiver)
+      //如果只是接收者，则修改关注状态
+      bmobServer.modifyMessageConcern(app.userId, this.data.mMessage.messageId, false, this.cancelMessageCallback, this.cancelMessageErrCallback)
+    else if (this.data.mMessage.state === relation.AsPersonal) {
+      //如果是个人通知，则修改通知状态
+      console.log("修改")
+      bmobServer.modifyMessage(this.data.mMessage.messageId, null, false, null, null, null, this.cancelMessageCallback, this.cancelMessageErrCallback)
+    }
 
   },
   cancelMessageCallback(message) {
 
     //更新本地
-    app.overdueMessage.unshift(app.receivedMessage.splice(this.data.indexOfMessage, 1)[0]);
+    globalData.overdueMessage.unshift(globalData.receivedMessage.splice(this.data.indexOfMessage, 1)[0]);
 
     wx.hideToast();
     wx.showToast({
@@ -98,7 +107,7 @@ Page({
 
     wx.navigateBack({
     })
-    
+
   },
   cancelMessageErrCallback(message) {
     wx.hideToast();

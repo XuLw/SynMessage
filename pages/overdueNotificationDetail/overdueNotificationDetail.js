@@ -1,5 +1,7 @@
 // pages/overdueNotificationDetail/overdueNotificationDetail.js
 var app = getApp();
+var globalData = require("../../utils/data.js").globalData;
+
 
 Page({
 
@@ -17,7 +19,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       indexOfMessage: options.id,
-      mMessage: app.overdueMessage[options.id]
+      mMessage: globalData.overdueMessage[options.id]
     })
   },
 

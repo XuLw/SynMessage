@@ -7,6 +7,8 @@ var relation = bmobConfig.relation;
 var app = getApp();
 
 var utils = require("../../utils/util.js");
+var globalData = require("../../utils/data.js").globalData;
+
 
 var tMessage = {};
 Page({
@@ -25,7 +27,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       indexOfMessage: options.id,
-      mMessage: app.sentMessage[options.id]
+      mMessage: globalData.sentMessage[options.id]
     })
 
   },
@@ -117,7 +119,7 @@ Page({
   submitCallback() {
 
     //本地更新
-    app.sentMessage.splice(this.data.indexOfMessage, 1, tMessage);
+    globalData.sentMessage.splice(this.data.indexOfMessage, 1, tMessage);
 
     wx.hideToast();
     wx.showToast({

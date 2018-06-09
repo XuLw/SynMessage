@@ -7,7 +7,7 @@
     <view class='overdue-noti-body-container'>
       <view class='overdue-noti-body'>
         <text class='overdue-noti-title'> {{title}} </text>
-        <image style='height:50rpx;width:50rpx;margin-right:16rpx;' mode=" scaleToFill " src='/images/more.png'></image>
+        <image style='height:50rpx;width:50rpx;margin-right:16rpx;' mode=" scaleToFill " src='{{effect ? "/images/clock.png" : "/images/cancel.png"}}'></image>
       </view>
     </view>
   </view>
