@@ -247,8 +247,8 @@ function convertDateFromString(dateString) {
     return date;
   }
 }
-// 修改relation中user对message的concern状态
-var modifyMessageConcern = function (userId, messageId, concern, callback, errCallback) {
+// 修改relation中user对message的concern状态(不修改messageTable中的effect)
+var modifyMessageConcernSimply = function (userId, messageId, concern, callback, errCallback) {
   relationTable.equalTo("userId", "==", userId);
   relationTable.equalTo("messageId", "==", messageId);
   relationTable.find().then(res => {
@@ -265,6 +265,11 @@ var modifyMessageConcern = function (userId, messageId, concern, callback, errCa
 
     if (errCallback != null) errCallback(err);
   })
+}
+// 修改relation中user对message的concern状态,且会修改publisher的messageTable中的effect
+var modifyMessageConcern=function (userId, messageId, concern, callback, errCallback){
+  modifyMessage(messageId,null,concern,null,null,null,null,null);
+  modifyMessageConcernSimply(userId, messageId, concern, callback, errCallback);
 }
 exports.initialize = initialize;
 exports.modifyMessageConcern = modifyMessageConcern;
