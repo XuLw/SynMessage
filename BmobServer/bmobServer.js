@@ -74,7 +74,6 @@ var addUserInfo = function (userId, name, callback, errCallback) {
   })
 }
 // 添加MessageInfo不涉及关联用户,可通过callback另行连接
-
 var addMessageInfo = function (title, effect, time, content, author, callback, errCallback) {
   messageTable.set("title", title);
   messageTable.set("effect", effect);
