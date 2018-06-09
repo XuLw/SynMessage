@@ -82,21 +82,6 @@ var addMessageInfo = function (title, effect, time, content, author, callback, e
   messageTable.set("time", time);
   messageTable.save().then(res => {
 
-    if (callback != null) callback(res);;//回掉函数
-  }).catch(err => {
-
-    if (errCallback != null) errCallback(err);//错误回调函数
-  })
-}
-
-var addMessageInfo = function (title, effect, time, content, author, callback, errCallback) {
-  messageTable.set("title", title);
-  messageTable.set("effect", effect);
-  messageTable.set("content", content);
-  messageTable.set("author", author);
-  messageTable.set("time", time);
-  messageTable.save().then(res => {
-
     messageTable.equalTo("objectId", "==", res.objectId);
     messageTable.find().then(res => {
 
