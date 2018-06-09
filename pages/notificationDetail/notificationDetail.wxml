@@ -17,5 +17,5 @@
     </text>
     </view>
   </scroll-view>
-  <button hover-class='button-cancle-down' hover-stay-time='100' class='button-cancle'>删 除</button>
+  <button bindtap='cancelMessage' hover-class='button-cancel-down' hover-stay-time='100' class='button-cancel'>删 除</button>
 </view>

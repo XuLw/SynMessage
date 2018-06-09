@@ -23,7 +23,7 @@
     <view bindtap='editNotification' hover-stay-time='100' hover-class='foot-left-down' class='foot-left'>
       <text>修改</text>
     </view>
-    <view hover-stay-time='100' hover-class='foot-middle-down' class='foot-middle'>
+    <view bindtap='cancelNotification' hover-stay-time='100' hover-class='foot-middle-down' class='foot-middle'>
       <text>删除</text>
     </view>
     <view hover-stay-time='100' hover-class='foot-right-down' class='foot-right'>
