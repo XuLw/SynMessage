@@ -125,9 +125,10 @@ var addRelationInfo = function (userId, messageId, relation, concern, callback, 
   })
 }
 // 通过userId得到与其特定relation的message数组
-var getMessageByUserId = function (userId, relation, callback, errCallback) {
+var getMessageByUserId = function (userId, relation,concern, callback, errCallback) {
   relationTable.equalTo("userId", "==", userId);
   relationTable.equalTo("relation", "==", relation);
+  relationTable.equalTo("concern", "==", concern);
   relationTable.find().then(res => {
 
     var messageIdArray = res.map(a => a.messageId);
@@ -147,9 +148,10 @@ var getMessageByUserId = function (userId, relation, callback, errCallback) {
   })
 }
 // 通过userId得到与其特定relation的且满足messageLimit的message数组
-var getMessageByUserIdWithLimit = function (userId, relation, messageLimit, callback, errCallback) {
+var getMessageByUserIdWithLimit = function (userId, relation,concern, messageLimit, callback, errCallback) {
   relationTable.equalTo("userId", "==", userId);
   relationTable.equalTo("relation", "==", relation);
+  relationTable.equalTo("concern", "==", concern);
   relationTable.find().then(res => {
 
     var messageIdArray = res.map(a => a.messageId);
