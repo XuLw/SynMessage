@@ -23,13 +23,34 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": 0,
+					"name": "fdsf",
+					"pathName": "pages/sharePage/sharePage",
+					"query": "id=68",
+					"scene": "1036",
+					"referrerInfo": {}
+				},
+				{
+					"id": -1,
+					"name": "434",
+					"pathName": "pages/sharePage/sharePage",
+					"query": "messageId=68",
+					"scene": "1036",
+					"referrerInfo": {}
+				}
+			]
 		}
 	}
 }

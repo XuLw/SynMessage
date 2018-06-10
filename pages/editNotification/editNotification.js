@@ -17,6 +17,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    mDate: "",
+    mTime: "",
     mMessage: {},
     indexOfMessage: 0
   },
@@ -28,6 +30,11 @@ Page({
     this.setData({
       indexOfMessage: options.id,
       mMessage: globalData.sentMessage[options.id]
+    })
+
+    this.setData({
+      mDate: this.data.mMessage.date,
+      mTime: this.data.mMessage.time
     })
 
   },
@@ -78,7 +85,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    
   },
   submit: function (e) {
 
@@ -143,13 +150,14 @@ Page({
     })
   },
   selectDate: function (e) {
+    console.log(e)
     this.setData({
-      curDate: e.detail.value
+      mDate: e.detail.value
     });
   },
   selectTime: function (e) {
     this.setData({
-      curTime: e.detail.value
+      mTime: e.detail.value
     });
   },
 

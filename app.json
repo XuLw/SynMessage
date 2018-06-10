@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/main/main",
+    "pages/sharePage/sharePage",
     "pages/index/index",
     "pages/newNotification/newNotification",
     "pages/sentNotificationDetail/sentNotificationDetail",
@@ -12,7 +13,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#8eca74",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "ZENplan",
     "navigationBarTextStyle": "black"
   }
 }

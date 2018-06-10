@@ -30,6 +30,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    globalData.sentMessage = [];
+    globalData.overdueMessage = [];
+    globalData.receivedMessage = [];
     //模板加载js文件
     this.tapOnSentDetail = sentNotification.tapOnSentDetail;
     this.tapOnAllDetail = allNotification.tapOnAllDetail;
@@ -37,13 +41,36 @@ Page({
 
     wx.hideToast();
 
+    let that = this;
     wx.showToast({
       title: '加载中',
       duration: 5000,
       icon: "loading"
     })
 
-    bmobServer.initialize(this.UserInfoCallback, this.UserInfoErrCallback);
+
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: function (res) {
+              //获取用户名
+              console.log("已授权")
+              getApp().userName = res.userInfo.nickName
+              bmobServer.initialize(that.UserInfoCallback, that.UserInfoErrCallback);
+            }
+          })
+        } else {
+          wx.hideToast();
+          wx.redirectTo({
+            url: '/pages/index/index',
+            fail: function (res) {
+              console.log(res)
+            }
+          })
+        }
+      }
+    })
 
   },
 
@@ -63,7 +90,6 @@ Page({
       _receivedNotification: globalData.receivedMessage,
       _overdueNotification: globalData.overdueMessage,
     })
-
   },
 
   /**
@@ -98,16 +124,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    if (res.from === 'button') {
-      console.log(res.target)
-    }
-    return {
-      title: '你收到了一条通知',
-      path: '/pages/index/index?id=123',
-      success: function (res) {
 
-      }
-    }
   },
 
   tapOnNewNotification: function () {
@@ -138,9 +155,11 @@ Page({
     }
   },
   UserInfoCallback(message) {
+    //  console.log(message)
     getApp().userId = message.authData.weapp.openid;
-    console.log(getApp().userId)
+    // console.log(getApp().userId)
     bmobServer.getMessageByUserId(getApp().userId, relation.AsPublisher, true, this.publicMessageCallback, this.errCallback);
+
   },
   publicMessageCallback(message) {
     today.setSeconds(0);

@@ -23,6 +23,7 @@ Page({
       })
 
       getApp().userName = e.detail.userInfo.nickName;
+      getApp().permission = true;
 
       BmobServer.initialize(this.userInfoCallback, null);
 

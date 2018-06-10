@@ -20,6 +20,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    console.log(options)
+
     this.setData({
       indexOfMessage: options.id,
       mMessage: globalData.sentMessage[options.id]
@@ -40,6 +43,8 @@ Page({
     this.setData({
       mMessage: globalData.sentMessage[this.data.indexOfMessage]
     })
+    console.log(this.data.mMessage);
+
   },
 
   /**
@@ -73,8 +78,15 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    var that = this;
+    if (res.from === 'button') {
+      console.log(res.target)
+    }
+    return {
+      title: '你接收到一个通知',
+      path: '/pages/sharePage/sharePage?id=' + that.data.mMessage.messageId
+    }
   },
   editNotification: function (e) {
     wx.navigateTo({

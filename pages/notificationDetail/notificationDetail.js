@@ -73,7 +73,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
   },
   cancelMessage: function () {
     //通过修改关系表concern

@@ -13,8 +13,8 @@
     <view class='section-deadline'>
       <text>截止时间</text>
       <view class='deadline'>
-        <picker name='deadlineDate' bindchange='selectDate' mode='date' value="{{mMessage.date}}" start="curDate">{{mMessage.date}}</picker>
-        <picker name='deadlineTime' bindchange='selectTime' mode='time' value="{{mMessage.time}}" start="curTime">{{mMessage.time}}</picker>
+        <picker name='deadlineDate' bindchange='selectDate' mode='date' value="{{mDate}}" start="curDate">{{mDate}}</picker>
+        <picker name='deadlineTime' bindchange='selectTime' mode='time' value="{{mTime}}" start="curTime">{{mTime}}</picker>
       </view>
     </view>
     <view class='section-name'>

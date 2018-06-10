@@ -7,7 +7,7 @@ var relationTable = Bmob.Query('myRelationTable');
 
 // 初始化BmobServer 并通过callback返回用户信息
 var initialize = function (callback, errCallback) {
-  
+
   Bmob.User.auth().then(res => {
 
     console.log('一键登陆成功')
@@ -54,8 +54,8 @@ var getUserInfoById = function (userId, callback, errCallback) {
 var getMessageInfoById = function (messageId, callback, errCallback) {
   messageTable.equalTo('messageId', '==', messageId)
   messageTable.find().then(res => {
-
-    if (callback != null) callback(res);;//回掉函数
+    console.log(res); console.log("fdsf")
+    callback(res);;//回掉函数
   }).catch(err => {
 
     if (errCallback != null) errCallback(err);//错误回调函数
@@ -185,6 +185,27 @@ var getUserbyMessageId = function (messageId, relation, callback, errCallback) {
     if (errCallback != null) errCallback(err);//错误回调函数
   })
 }
+//通过messageId得到user数组
+var getAllUserbyMessageId = function (messageId, callback, errCallback) {
+  relationTable.equalTo("messageId", "==", messageId);
+  relationTable.find().then(res => {
+    // console.log(res)
+    var userIdArray = res.map(a => a.userId);
+    console.log(userIdArray);
+    // userTable.containedIn("userId", userIdArray);
+    // userTable.find().then(res => {
+
+    if (callback != null) callback(userIdArray);;//回掉函数
+    // }).catch(err => {
+
+    //   if (errCallback != null) errCallback(err);//错误回调函数
+    // })
+  }).catch(err => {
+
+    if (errCallback != null) errCallback(err);//错误回调函数
+  })
+}
+
 //修改指定messageId的message,不修改的选项填写null
 var modifyMessage = function (messageId, title, effect, time, content, author, callback, errCallback) {
   messageTable.equalTo("messageId", "==", messageId);
@@ -267,8 +288,8 @@ var modifyMessageConcernSimply = function (userId, messageId, concern, callback,
   })
 }
 // 修改relation中user对message的concern状态,且会修改publisher的messageTable中的effect
-var modifyMessageConcern=function (userId, messageId, concern, callback, errCallback){
-  modifyMessage(messageId,null,concern,null,null,null,null,null);
+var modifyMessageConcern = function (userId, messageId, concern, callback, errCallback) {
+  modifyMessage(messageId, null, concern, null, null, null, null, null);
   modifyMessageConcernSimply(userId, messageId, concern, callback, errCallback);
 }
 exports.initialize = initialize;
@@ -287,3 +308,4 @@ exports.getUserInfoById = getUserInfoById;
 exports.getMessageInfoById = getMessageInfoById;
 exports.addUserInfo = addUserInfo;
 exports.addMessageInfo = addMessageInfo;
+exports.getAllUserbyMessageId = getAllUserbyMessageId

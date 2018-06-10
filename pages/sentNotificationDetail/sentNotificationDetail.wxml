@@ -27,7 +27,7 @@
       <text>删除</text>
     </view>
     <view hover-stay-time='100' hover-class='foot-right-down' class='foot-right'>
-      <button style='height:100%;width:100%;border:0;color:white' plain='true' open-type='share'>分享到群</button>
+      <button class='share-button' style=' plain='true' open-type='share'><text style='color:white'>分享到群</text></button>
     </view>
   </view>
 </view>
