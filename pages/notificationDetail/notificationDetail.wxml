@@ -9,7 +9,7 @@
       <text space="emsp">  {{mMessage.content}}</text>
     </view>
     <view class='name-container'>
-      <text style='font-size:0.8em;'>written by</text>
+      <text style='font-size:0.8em;'>by</text>
       <text>{{mMessage.author}}</text>
     </view>
     <view class='date-container'>

@@ -3,7 +3,6 @@
 @import "../../templates/all_notification_template/all_notification_template.wxss";
 @import "../../templates/overdue_notification_template/overdue_notification_template.wxss";
 
-
 page {
   height: 100%;
   width: 100%;
@@ -23,18 +22,9 @@ page {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: #95c6f2;
+  /* background-color: #95c6f2;  */
+  background-color: #8eca74;
   /* outline: 1px solid red; */
-}
-
-.head-container view {
-  width: 30%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* outline: 1px solid red;  */
-  font-size: 1.3em;
 }
 
 .body-container {
@@ -47,7 +37,6 @@ page {
   height: 90%;
   width: 100%;
 }
-
 
 .add-notification {
   /* outline: 1px solid red; */
@@ -80,7 +69,7 @@ page {
 
 /*全局  */
 
-   /*     */
+/*     */
 
 ::-webkit-scrollbar {
   width: 0;
@@ -89,7 +78,23 @@ page {
 }
 
 .tapOn {
-  color: red;
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.3em;
+}
+
+.tapOff {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #b7eaa0;
+  font-size: 1.3em;
 }
 
 /* box-shadow: 0 20rpx 20rpx -10rpx #aaa; */

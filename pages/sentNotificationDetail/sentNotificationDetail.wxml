@@ -9,7 +9,7 @@
       <text space="emsp">  {{mMessage.content}}</text>
     </view>
     <view class='name-container'>
-      <text style='font-size:0.8em;'>written by</text>
+      <text style='font-size:0.8em;'>by</text>
       <text>{{mMessage.author}}</text>
     </view>
     <view class='date-container'>
@@ -27,7 +27,7 @@
       <text>删除</text>
     </view>
     <view hover-stay-time='100' hover-class='foot-right-down' class='foot-right'>
-      <button class='share-button' style=' plain='true' open-type='share'><text style='color:white'>分享到群</text></button>
+      <button class='share-button' hover-class='share-button-down' hover-stay-time='100' style=' plain='true' open-type='share'><text style='color:white'>分享到群</text></button>
     </view>
   </view>
 </view>

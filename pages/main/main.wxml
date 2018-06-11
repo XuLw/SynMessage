@@ -5,13 +5,13 @@
 
 <view class='base-container'>
   <view class='head-container'>
-    <view class='{{currentTap == 0 ? "tapOn" : ""}}' data-current='0' bindtap='switchTitle'>
+    <view class='{{currentTap == 0 ? "tapOn" : "tapOff"}}' data-current='0' bindtap='switchTitle'>
       <text>Sent</text>
     </view>
-    <view class='{{currentTap == 1 ? "tapOn" : ""}}' data-current='1' bindtap='switchTitle'>
+    <view class='{{currentTap == 1 ? "tapOn" : "tapOff"}}' data-current='1' bindtap='switchTitle'>
       <text>All</text>
     </view>
-    <view class='{{currentTap == 2 ? "tapOn" : ""}}' data-current='2' bindtap='switchTitle'>
+    <view class='{{currentTap == 2 ? "tapOn" : "tapOff"}}' data-current='2' bindtap='switchTitle'>
       <text>Overdue</text>
     </view>
   </view>

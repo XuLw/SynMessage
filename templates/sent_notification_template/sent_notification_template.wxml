@@ -2,7 +2,7 @@
   <view class='sent-notification-container' catchtap="tapOnSentDetail" data-id="{{id}}">
     <view class='sent-noti-time-container'>
       <text>{{date}}</text>
-      <text>{{time}}</text>
+      <text style='color:#5C5C5C'>{{time}}</text>
     </view>
     <view class='sent-noti-body-container'>
       <view class='sent-noti-body'>
