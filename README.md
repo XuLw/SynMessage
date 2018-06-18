@@ -1,6 +1,41 @@
 # SynMessage
 更方便的管理通知
 
+## 重大更新BmobServer2.0 李伟港
+应对Bmob1.6.0版本添加子查询,更新BmobServer2.0
+主要更新:
+* 更新Bmob后台数据库:
+    * 使用_User替代myUserTable,为了保证之前的BmobServer1.0仍可以使用,暂不删除myMessageTable
+    * myRelation添加bmob中的pointer类型,user和message映射_User和myMessageTable
+    * 在BmobServer1.0中userId和messageId在BmobServer2.0z中将被废弃,使用Bmob数据库自导的objectId,对于使用BmobServer来说在函数的接口上没有太大变化(只是messageId改变成objectId,是由int转变成string).
+    * 关于函数的改变可以查看下列说明.
+```javaScript
+    //1. 删除添加用户的函数,使用_User会在Bmob登陆时添加新用户
+    //var addUserInfo = function (userId, name, callback, errCallback) 
+
+    //2. var addMessageInfo = function (title, effect, time, content, author, callback, errCallback) 
+    //回调函数将传入 message的objectId
+
+    //3.var getMessageByUserId = function (userId, relation, concern, callback, errCallback) 
+    // userId为_User中的objectId ,回调函数传入message的数组(不只是objectId噢)
+
+    //4.var getMessageByUserIdWithLimit = function (userId, relation, concern, messageLimit, callback, errCallback) 
+    // userId为_User中的objectId ,回调函数传入message的数组(不只是objectId噢)
+
+    //5.var getUserbyMessageId = function (messageId, relation, callback, errCallback) 
+    //messageId为objectId ,回调函数传回的是user的数组(不只是objectId)
+
+    //6. var getAllUserbyMessageId = function (messageId, callback, errCallback) 
+    // messageId为objectId ,回调函数传回的是user的数组(不只是objectId)
+
+    //7. var modifyMessage = function (messageId, title, effect, time, content, author, callback, errCallback) 
+    // messageId为objectId
+
+    //8. var modifyMessageConcern = function (userId, messageId, concern, callback, errCallback) 
+    // userId ,messageId分别为_User和myMessageTable中的objectId
+    
+
+```
 ## 2018.6.9 Concern的修改与effect关联 李伟港
 modifyMessageConcern函数添加了修改对应的message的effect的功能,对于publisher与message的concern会反映到effect,而personal和receiver则不会影响message的effect字段.
 ## BmobServer 初始化方法 李伟港
