@@ -3,6 +3,9 @@
 
 ## 重大更新BmobServer2.0 李伟港
 应对Bmob1.6.0版本添加子查询,更新BmobServer2.0
+使用前请记得require('./BmobServer/BmobServer2.0.js')
+(大写开头BmobServer2.0.js)
+
 主要更新:
 * 更新Bmob后台数据库:
     * 使用_User替代myUserTable,为了保证之前的BmobServer1.0仍可以使用,暂不删除myMessageTable
