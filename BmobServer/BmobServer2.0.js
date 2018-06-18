@@ -110,6 +110,7 @@ var addRelationInfo = function (userId, messageId, relation, concern, callback, 
 var getMessageByUserId = function (userId, relation, concern, callback, errCallback) {
   
   relationTable.statTo("where",{"user":{"$inQuery":{"where":{"objectId":userId},"className":"_User"}}});
+  relationTable.include("user","message")
   if(relation!=null)
   relationTable.equalTo("relation", "==", relation);
   relationTable.equalTo("concern", "==", concern);
@@ -127,6 +128,25 @@ var getMessageByUserId = function (userId, relation, concern, callback, errCallb
 
     if (errCallback != null) errCallback(err);//错误回调函数
   })
+}
+var getMessageByUserIdInclude= function (userId, relation, concern, callback, errCallback) {
+  
+    relationTable.statTo("where",{"user":{"$inQuery":{"where":{"objectId":userId},"className":"_User"}}});
+    relationTable.include("user","message");
+    if(relation!=null)
+    relationTable.equalTo("relation", "==", relation);
+    relationTable.equalTo("concern", "==", concern);
+    relationTable.find().then(res => {
+      console.log(res);
+      
+  
+      if(callback!=null) callback(messageArray);
+    }).catch(err => {
+  
+      if (errCallback != null) errCallback(err);//错误回调函数
+    })
+  
+  
 }
 
 // 通过userId得到与其特定relation的且满足messageLimit的message数组(不只是Id)
@@ -291,7 +311,7 @@ var modifyMessageConcern = function (userId, messageId, concern, callback, errCa
     if (errCallback != null) errCallback(err);
   })
 }
-
+exports.getMessageByUserIdInclude=getMessageByUserIdInclude;
 exports.initialize = initialize;
 exports.modifyMessageConcern = modifyMessageConcern;
 exports.translateBmobDateToDate = translateBmobDateToDate;
