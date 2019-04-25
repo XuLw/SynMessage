@@ -1,0 +1,20 @@
+<template name="sentNotificationTemplate">
+  <view class='sent-notification-container' catchtap="tapOnSentDetail" data-id="{{id}}">
+    <view class='sent-noti-time-container'>
+      <text>{{date}}</text>
+      <text style='color:#5C5C5C'>{{time}}</text>
+    </view>
+    <view class='sent-noti-body-container'>
+      <view class='sent-noti-body'>
+        <view class='sent-title-container'>
+          <text> {{title}} </text>
+        </view>
+        <view class='sent-read'>
+          <image mode='scaleToFill' style='height:40rpx;width:40rpx; margin-left:20rpx;' src='/images/eye.png'></image>
+          <text style='margin-right:20rpx;'>32</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</template>

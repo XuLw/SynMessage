@@ -1,0 +1,14 @@
+<template name="allNotificationTemplate">
+  <view class='all-notification-container' catchtap='tapOnAllDetail' data-id="{{id}}">
+    <view class='all-noti-time-container'>
+      <text>{{date}}</text>
+      <text style='color:#5C5C5C'>{{time}}</text>
+    </view>
+    <view class='all-noti-body-container'>
+      <view class='all-noti-body' style='background-color: {{state === "personal" ? "#ff99cc" : "#ff9999"}}'>
+        <text class='all-noti-title'>{{title}}</text>
+        <text class='all-noti-author'>{{name}}</text>
+      </view>
+    </view>
+  </view>
+</template>

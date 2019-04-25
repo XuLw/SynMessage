@@ -1,0 +1,35 @@
+<!--pages/notificationDetail/notificationDetail.wxml-->
+<view class='base-container'>
+  <scroll-view scroll-y class='detail-container'>
+    <view class='title-container'>
+      <text>{{mMessage.title}}</text>
+    </view>
+
+    <view class='content-container'>
+      <text space="emsp">  {{mMessage.content}}</text>
+    </view>
+    <view class='name-container'>
+      <text style='font-size:0.8em;'>by</text>
+      <text>{{mMessage.author}}</text>
+    </view>
+    <view class='date-container'>
+      <text>{{mMessage.date}} {{mMessage.time}}</text>
+    </view>
+    <view class='read-container'>
+      <text>6人已保存通知</text>
+    </view>
+  </scroll-view>
+  <view class='foot-container'>
+    <view bindtap='editNotification' hover-stay-time='100' hover-class='foot-left-down' class='foot-left'>
+      <text>修改</text>
+    </view>
+    <view bindtap='cancelNotification' hover-stay-time='100' hover-class='foot-middle-down' class='foot-middle'>
+      <text>删除</text>
+    </view>
+    <view hover-stay-time='100' hover-class='foot-right-down' class='foot-right'>
+      <button class='share-button' hover-class='share-button-down' hover-stay-time='100' open-type='share '>
+        <text style='color:white '>分享到群</text>
+      </button>
+    </view>
+  </view>
+</view>

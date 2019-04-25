@@ -1,0 +1,27 @@
+<view class='base-container'>
+  <view class='system-notification'>
+    <image class='noti-image' mode='scaleToFill' src='/images/notice.png'></image>
+    <text style='color:red; margin-left:1em;'>持续完善中..</text>
+  </view>
+  <form class='form-container' bindsubmit='submit'>
+    <view class='section'>
+      <input name='title' type='text' value='{{mMessage.title}}' focus='true' placeholder='请输入标题'></input>
+    </view>
+    <view class='section'>
+      <textarea name='content' value='{{mMessage.content}}' maxlength='300' show-confirm-bar="false" placeholder='请输入内容 ( < 300 )'></textarea>
+    </view>
+    <view class='section-deadline'>
+      <text>截止时间</text>
+      <view class='deadline'>
+        <picker name='deadlineDate' bindchange='selectDate' mode='date' value="{{mDate}}" start="curDate">{{mDate}}</picker>
+        <picker name='deadlineTime' bindchange='selectTime' mode='time' value="{{mTime}}" start="curTime">{{mTime}}</picker>
+      </view>
+    </view>
+    <view class='section-name'>
+      <text>签名</text>
+      <input name='name' style='width:9em;' type='text' value='{{mMessage.author}}'></input>
+    </view>
+    <!-- <view class='block-line'></view> -->
+    <button class='submit-button' type="primary" form-type='submit'>保存</button>
+  </form>
+</view>

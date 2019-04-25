@@ -1,0 +1,19 @@
+<view class='base-container'>
+  <scroll-view scroll-y class='detail-container'>
+    <view class='title-container'>
+      <text>{{mMessage.title}}</text>
+    </view>
+
+    <view class='content-container'>
+      <text space="emsp">  {{mMessage.content}}</text>
+    </view>
+    <view class='name-container'>
+      <text style='font-size:0.8em;'>by</text>
+      <text>{{mMessage.author}}</text>
+    </view>
+    <view class='date-container'>
+      <text>{{mMessage.date}} {{mMessage.time}}
+    </text>
+    </view>
+  </scroll-view>
+</view>

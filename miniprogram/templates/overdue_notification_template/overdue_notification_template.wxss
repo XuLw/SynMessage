@@ -1,0 +1,63 @@
+/*通知体  */
+
+.overdue-body-container {
+  height: 100%;
+  width: 100%;
+  /* outline: 1px dashed red; */
+}
+
+/*通知  */
+
+.overdue-notification-container {
+  height: 140rpx;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  margin: 0 20rpx;
+  border-radius: 8rpx;
+  /* background-color: paleturquoise; *//* outline: 1px solid rebeccapurple; */
+}
+
+/*时间  */
+
+.overdue-noti-time-container {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  /* border-right: 1px solid red; */
+  justify-content: center;
+  flex-direction: column;
+}
+
+/*通知体  */
+
+.overdue-noti-body-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+}
+
+.overdue-noti-body {
+  height: 90%;
+  width: 90%;
+  display: flex;
+  padding-left: 1em;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8rpx;
+  background-color: #f7f7f7;
+  box-shadow: 0 10rpx 10rpx -5rpx #aaa;
+}
+
+.overdue-noti-title {
+  width: 75%;
+  /* outline: 1px solid red; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

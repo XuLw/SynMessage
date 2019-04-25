@@ -1,0 +1,100 @@
+/* pages/main/main.wxss */
+@import "../../templates/sent_notification_template/sent_notification_template.wxss";
+@import "../../templates/all_notification_template/all_notification_template.wxss";
+@import "../../templates/overdue_notification_template/overdue_notification_template.wxss";
+
+page {
+  height: 100%;
+  width: 100%;
+}
+
+.base-container {
+  width: 100%;
+  height: 100%;
+}
+
+/*头  */
+
+.head-container {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: #95c6f2;  */
+  background-color: #8eca74;
+  /* outline: 1px solid red; */
+}
+
+.body-container {
+  height: 100%;
+  width: 100%;
+  /* outline: 1px dashed red; */
+}
+
+.swiper-container {
+  height: 90%;
+  width: 100%;
+}
+
+.add-notification {
+  /* outline: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100rpx;
+  height: 100rpx;
+  position: fixed;
+  bottom: 60rpx;
+  background-color: #0ed50e;
+  right: 40rpx;
+  border-radius: 100rpx;
+  box-shadow: 10rpx 20rpx 20rpx -10rpx #aaa;
+}
+
+.add-notification-down {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100rpx;
+  height: 100rpx;
+  position: fixed;
+  background-color: #0d720d;
+  bottom: 60rpx;
+  right: 40rpx;
+  border-radius: 100rpx;
+  box-shadow: 5rpx 10rpx 10rpx -5rpx #aaa;
+}
+
+/*全局  */
+
+/*     */
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.tapOn {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.3em;
+}
+
+.tapOff {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #b7eaa0;
+  font-size: 1.3em;
+}
+
+/* box-shadow: 0 20rpx 20rpx -10rpx #aaa; */

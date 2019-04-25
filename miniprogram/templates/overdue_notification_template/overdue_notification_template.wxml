@@ -1,0 +1,15 @@
+<template name="overdueNotificationTemplate">
+  <view class='overdue-notification-container' catchtap='tapOnOverdueDetail' data-id="{{id}}">
+    <view class='overdue-noti-time-container'>
+      <text >{{date}}</text>
+      <text style='color:#5C5C5C'>{{time}}</text>
+    </view>
+    <view class='overdue-noti-body-container'>
+      <view class='overdue-noti-body'>
+        <text class='overdue-noti-title'> {{title}} </text>
+        <image style='height:50rpx;width:50rpx;margin-right:16rpx;' mode=" scaleToFill " src='{{effect ? "/images/clock.png" : "/images/cancel.png"}}'></image>
+      </view>
+    </view>
+  </view>
+
+</template>

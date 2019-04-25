@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/main/main",
+    "pages/sharePage/sharePage",
+    "pages/index/index",
+    "pages/newNotification/newNotification",
+    "pages/sentNotificationDetail/sentNotificationDetail",
+    "pages/editNotification/editNotification",
+    "pages/notificationDetail/notificationDetail",
+    "pages/overdueNotificationDetail/overdueNotificationDetail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#8eca74",
+    "navigationBarTitleText": "ZenPlan",
+    "navigationBarTextStyle": "black"
+  },
+  "cloud": true,
+  "sitemapLocation": "sitemap.json"
+}

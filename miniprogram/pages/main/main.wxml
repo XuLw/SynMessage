@@ -1,0 +1,49 @@
+<!--pages/main/main.wxml-->
+<import src='../../templates/sent_notification_template/sent_notification_template.wxml' />
+<import src='../../templates/all_notification_template/all_notification_template.wxml' />
+<import src='../../templates/overdue_notification_template/overdue_notification_template.wxml' />
+
+<view class='base-container'>
+  <view class='head-container'>
+    <view class='{{currentTap == 0 ? "tapOn" : "tapOff"}}' data-current='0' bindtap='switchTitle'>
+      <text>Sent</text>
+    </view>
+    <view class='{{currentTap == 1 ? "tapOn" : "tapOff"}}' data-current='1' bindtap='switchTitle'>
+      <text>All</text>
+    </view>
+    <view class='{{currentTap == 2 ? "tapOn" : "tapOff"}}' data-current='2' bindtap='switchTitle'>
+      <text>Overdue</text>
+    </view>
+  </view>
+  <swiper duration='200' class='swiper-container' current='{{currentTap}}' bindchange='slideOnSwiper'>
+    <swiper-item>
+      <!-- 自己发送的通知的显示  -->
+      <scroll-view scroll-y class='body-container'>
+        <block wx:for="{{_sentNotification}}" wx:key="{{item.messageId}}">
+          <template is="sentNotificationTemplate" data="{{...item,id:index}}"></template>
+        </block>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <!--全部的通知  -->
+      <scroll-view scroll-y class='body-container'>
+        <block wx:for="{{_receivedNotification}}" wx:key="{{item.messageId}}">
+          <template is="allNotificationTemplate" data="{{...item,id:index}}"></template>
+        </block>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <!--过期的通知  -->
+      <scroll-view scroll-y class='body-container'>
+        <block wx:for="{{_overdueNotification}}" wx:key="{{item.messageId}}">
+          <template is="overdueNotificationTemplate" data="{{...item,id:index}}"></template>
+        </block>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+
+  <view class='add-notification' hover-class='add-notification-down' hover-stay-time='100' catchtap='tapOnNewNotification'>
+    <image style='height:50rpx;width:50rpx;' mode="scaleToFill " src='/images/plus.png'></image>
+  </view>
+
+</view>
