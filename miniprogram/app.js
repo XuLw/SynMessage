@@ -64,45 +64,19 @@ function testHasAddMessage() {
 }
 
 
-function init() {
-  // 获取openid
-  wx.getStorage({
-    key: constants.open_id,
-    success: function(res) {
-      // 已经有openid
-      getApp().globalData.openid = res.data
-      // console.log(res)
-      console.log("success")
-
-      // testHasAddMessage()
-    },
-    fail: function(res) {
-      console.log("failed")
-      // 本地没有openid， 调用云函数获取
-      wx.cloud.callFunction({
-        name: "get_openid"
-      }).then(res => {
-        // console.log(res.result.openid)
-        getApp().globalData.openid = res.result.openid
-        // 储存到本地
-        wx.setStorage({
-          key: constants.open_id,
-          data: res.result.openid,
-        })
-      }).catch(res => {
-        console.log(res)
-      })
-    }
-  })
-}
-
 App({
+  globalData: {
+    openid: null,
+    userInfo: null
+  },
   onLaunch: function(res) {
-    this.globalData = {}
+    //   getApp().globalData.userInfo = {}
+    //   getApp().globalData.openid = ""
 
     cloudInit()
 
-    init()
+    this.init()
+
     // testAddMessage()
     // testGetAllMessage()
     // testDeleteMessage()
@@ -110,8 +84,39 @@ App({
 
   },
 
-  onShow: function(res) {},
-  callback(res) {
-    console.log(res[0])
+  onShow: function(res) {
+
+  },
+  init: function() {
+    let that = this
+    // 获取openid
+    wx.getStorage({
+      key: constants.open_id,
+      success: function(res) {
+        // 已经有openid
+        that.globalData.openid = res.data
+        // console.log(res)
+        console.log("success")
+
+        // testHasAddMessage()
+      },
+      fail: function(res) {
+        console.log("failed")
+        // 本地没有openid， 调用云函数获取
+        wx.cloud.callFunction({
+          name: "get_openid"
+        }).then(res => {
+          // console.log(res.result.openid)
+          that.globalData.openid = res.result.openid
+          // 储存到本地
+          wx.setStorage({
+            key: constants.open_id,
+            data: res.result.openid,
+          })
+        }).catch(res => {
+          console.log(res)
+        })
+      }
+    })
   }
 })

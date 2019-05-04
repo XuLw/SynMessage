@@ -120,11 +120,13 @@ Page({
           wx.hideToast()
           wx.showToast({
             title: '添加成功！',
-            icon: 'none',
-            duration: 1000
-          })
-          wx.redirectTo({
-            url: "/pages/main/main"
+            icon: 'success',
+            duration: 3000,
+            complete: function() {
+              wx.redirectTo({
+                url: "/pages/main/main"
+              })
+            }
           })
 
         }).catch(res => {
@@ -132,10 +134,12 @@ Page({
           wx.showToast({
             title: '出现问题了..',
             icon: 'none',
-            duration: 1000
-          })
-          wx.redirectTo({
-            url: "/pages/main/main"
+            duration: 1000,
+            complete: function() {
+              wx.redirectTo({
+                url: "/pages/main/main"
+              })
+            }
           })
         })
       }
