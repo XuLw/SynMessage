@@ -1,5 +1,7 @@
 // pages/sharePage/sharePage.js
-// var relation = bmobConfig.relation;
+const dbUtils = require("../../utils/databaseUtil.js")
+
+var now = new Date().getTime();
 
 Page({
 
@@ -14,131 +16,131 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    var that = this;
+  onLoad: function(options) {
     this.setData({
       messageId: options.id
     })
 
-    // bmobServer.initialize(that.UserInfoCallback, that.UserInfoErrCallback);
+    //加载消息
 
+    dbUtils.getMessageById(this.data.messageId).then(res => {
+      if (!res.data.isDeleted && (now - res.data.deadline < 864000000))
+        // 消息还有效
+        this.setData({
+          mMessage: res.data
+        })
+      else {
+        wx.showToast({
+          title: '通知已过期',
+          icon: 'none',
+          duration: 1000
+        })
+        wx.redirectTo({
+          url: "/pages/main/main"
+        })
+      }
+    }).catch(res => {
+      console.log(res)
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
-  ignoreNoti: function () {
+  ignoreNoti: function() {
     wx.reLaunch({
       url: '/pages/main/main',
     })
   },
-  catchNoti: function () {
+  catchNoti: function() {
     //获取通知
     wx.showToast({
-      title: '上传中',
+      title: '获取中',
       icon: "loading",
       duration: 3000
     })
-    console.log(getApp().userId)
-    console.log(this.data.messageId)
-    bmobServer.addRelationInfo(getApp().userId, this.data.messageId - 0, relation.AsReceiver, true, this.addRelationInfoCallback, this.addRelationInfoErrCallback);
-    // bmobServer.addRelationInfo("1", 68, relation.AsReceiver, true, this.addRelationInfoCallback, this.addRelationInfoErrCallback);
-  },
 
-  addRelationInfoCallback(res) {
+    // 进行获取
+    dbUtils.hasAddMessage(this.data._id).then(res => {
+      if (res) {
+        // 已经添加了
+        wx.hideToast()
+        wx.showToast({
+          title: '已添加！',
+          icon: 'success',
+          duration: 3000,
+          complete: function() {
+            wx.redirectTo({
+              url: "/pages/main/main"
+            })
+          }
+        })
 
-    wx.hideToast();
-    wx.reLaunch({
-      url: '/pages/main/main',
+      } else {
+        // 未添加 
+        dbUtils.addMessage(this.data._id).then(res => {
+          wx.hideToast()
+          wx.showToast({
+            title: '添加成功！',
+            icon: 'none',
+            duration: 1000
+          })
+          wx.redirectTo({
+            url: "/pages/main/main"
+          })
+
+        }).catch(res => {
+          console.log(res)
+          wx.showToast({
+            title: '出现问题了..',
+            icon: 'none',
+            duration: 1000
+          })
+          wx.redirectTo({
+            url: "/pages/main/main"
+          })
+        })
+      }
+    }).catch(res => {
+      console.log(res)
     })
-
-  },
-  addRelationInfoErrCallback(res) {
-    console.log(res)
-    wx.showToast({
-      title: '出现问题了..',
-      icon: 'none',
-      duration: 1000
-    })
-  },
-  UserInfoCallback(message) {
-    //  console.log(message)
-    getApp().userId = message.authData.weapp.openid;
-    // console.log("appid")
-    console.log(getApp().userId)
-    //查询是否自己发送的通知
-    // getApp().userId = '10';
-    bmobServer.getAllUserbyMessageId(this.data.messageId - 0, this.getAllUserCallback, this.getAllUserErrCallback);
-
-  },
-  getAllUserCallback(res) {
-    //已经添加 或者 是自己发送的
-    if (res.indexOf(getApp().userId) != -1) {
-      wx.reLaunch({
-        url: '/pages/main/main',
-      })
-    } else {
-      //否则查询通知信息
-      bmobServer.getMessageInfoById(this.data.messageId - 0, this.queryCallback, this.queryErrCallback)
-    }
-  },
-  queryCallback(res) {
-    console.log(this.data.messageId)
-    console.log(res)
-    //初始化页面通知
-    var tMessage = res[0];
-    tMessage.date = tMessage.time.iso.substr(0, 10);
-    tMessage.time = tMessage.time.iso.substr(11, 5);
-    tMessage.state = relation.AsReceiver;
-    this.setData({
-      mMessage: tMessage
-    })
-
-  },
-  queryErrCallback(res) {
-    wx.showToast({
-      title: '通知已经不存在',
-      icon: 'none',
-      duration: 1000
-    })
-  },
-  getAllUserErrCallback(res) { },
+  }
 })

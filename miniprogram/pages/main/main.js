@@ -33,7 +33,7 @@ Page({
     })
 
     dbUtil.getAllMessage().then(res => {
-      // console.log(res.result)
+      console.log(res.result)
 
       var data = res.result
       const _openid = getApp().globalData.openid
@@ -143,6 +143,7 @@ Page({
       _receivedNotification: globalData.receivedMessage.sort(compare('deadline')),
       _overdueNotification: globalData.overdueMessage.sort(compare('deadline')),
     })
+
   },
 
   /**
@@ -206,99 +207,5 @@ Page({
         currentTap: e.currentTarget.dataset.current
       })
     }
-  },
-  UserInfoCallback(message) {
-    //  console.log(message)
-    getApp().userId = message.authData.weapp.openid;
-    // console.log(getApp().userId)
-    bmobServer.getMessageByUserId(getApp().userId, relation.AsPublisher, true, this.publicMessageCallback, this.errCallback);
-
-  },
-  publicMessageCallback(message) {
-    now
-      .setSeconds(0);
-    for (var i = 0; i < message.length; i++) {
-      //转换为js里面的Date
-      var date = bmobServer.translateBmobDateToDate(message[i].time);
-      if (date > now &&
-        message[i].effect === true) {
-        //消息有效
-        message[i].date = message[i].time.iso.substr(0, 10);
-        message[i].time = message[i].time.iso.substr(11, 5);
-        message[i].state = relation.AsPublisher;
-        globalData.sentMessage.unshift(message[i]);
-      } else {
-        message[i].date = message[i].time.iso.substr(0, 10);
-        message[i].time = message[i].time.iso.substr(11, 5);
-        message[i].state = relation.AsPublisher;
-        globalData.overdueMessage.unshift(message[i]);
-      }
-    }
-    bmobServer.getMessageByUserId(getApp().userId, relation.AsReceiver, true, this.receivedMessageCallback, this.errCallback);
-  },
-  receivedMessageCallback: function(message) {
-
-    for (var i = 0; i < message.length; i++) {
-      //转换为js里面的Date
-      var date = bmobServer.translateBmobDateToDate(message[i].time);
-      if (date > now &&
-        message[i].effect === true) {
-        //消息有效
-        message[i].date = message[i].time.iso.substr(0, 10);
-        message[i].time = message[i].time.iso.substr(11, 5);
-        message[i].state = relation.AsReceiver;
-        globalData.receivedMessage.unshift(message[i]);
-      } else {
-        message[i].date = message[i].time.iso.substr(0, 10);
-        message[i].time = message[i].time.iso.substr(11, 5);
-        message[i].state = relation.AsReceiver;
-        globalData.overdueMessage.unshift(message[i]);
-      }
-    }
-
-    bmobServer.getMessageByUserId(getApp().userId, relation.AsReceiver, false, this.receivedMessageCallback1, this.errCallback);
-
-  },
-  receivedMessageCallback1(message) {
-    //不再关注 都为无效
-    globalData.overdueMessage = globalData.overdueMessage.concat(message);
-
-    bmobServer.getMessageByUserId(getApp().userId, relation.AsPersonal, true, this.personalMessageCallback, this.errCallback);
-  },
-  personalMessageCallback(message) {
-
-    for (var i = 0; i < message.length; i++) {
-      //转换为js里面的Date
-      var date = bmobServer.translateBmobDateToDate(message[i].time);
-      if (date > now &&
-        message[i].effect === true) {
-        //消息有效
-        message[i].date = message[i].time.iso.substr(0, 10);
-        message[i].time = message[i].time.iso.substr(11, 5);
-        message[i].state = relation.AsPersonal;
-        globalData.receivedMessage.unshift(message[i]);
-      } else {
-        message[i].date = message[i].time.iso.substr(0, 10);
-        message[i].time = message[i].time.iso.substr(11, 5);
-        message[i].state = relation.AsPersonal;
-        globalData.overdueMessage.unshift(message[i]);
-      }
-    }
-
-    this.setData({
-      _sentNotification: globalData.sentMessage,
-      _receivedNotification: globalData.receivedMessage,
-      _overdueNotification: globalData.overdueMessage,
-    })
-
-    wx.hideToast();
-
-  },
-  errCallback(message) {
-    console.log(message)
-  },
-
-  UserInfoErrCallback(message) {
-    console.log(message)
   }
 })

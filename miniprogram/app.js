@@ -57,6 +57,13 @@ function testGetAllMessage() {
   })
 }
 
+function testHasAddMessage() {
+  dbUtil.hasAddMessage("9c4488c75cc071b20614bb437ae6c93").then(res => {
+    console.log(res)
+  })
+}
+
+
 function init() {
   // 获取openid
   wx.getStorage({
@@ -66,6 +73,8 @@ function init() {
       getApp().globalData.openid = res.data
       // console.log(res)
       console.log("success")
+
+      // testHasAddMessage()
     },
     fail: function(res) {
       console.log("failed")
@@ -98,6 +107,7 @@ App({
     // testGetAllMessage()
     // testDeleteMessage()
     // testDeleteRelation()
+
   },
 
   onShow: function(res) {},

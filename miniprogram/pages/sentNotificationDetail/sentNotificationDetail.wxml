@@ -26,8 +26,8 @@
     <view bindtap='cancelNotification' hover-stay-time='100' hover-class='foot-middle-down' class='foot-middle'>
       <text>删除</text>
     </view>
-    <view hover-stay-time='100' hover-class='foot-right-down' class='foot-right'>
-      <button class='share-button' hover-class='share-button-down' hover-stay-time='100' open-type='share '>
+    <view  class='foot-right' >
+      <button  class='share-button' hover-class='share-button-down' hover-stay-time='100' open-type='share'>
         <text style='color:white '>分享到群</text>
       </button>
     </view>

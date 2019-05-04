@@ -9,23 +9,6 @@ function init() {
   // some init code
 }
 
-// 获取所有关系
-function _getAllRelation() {
-  const db = wx.cloud.database()
-
-  return new Promise((resolve, reject) => {
-    db.collection(RELATION).where({
-      _openid: getApp().globalData.openid,
-      concern: true
-    }).get().then(res => {
-      console.log(res.data)
-      resolve()
-    }).then(res => {
-      console.log(res)
-      reject()
-    })
-  })
-}
 
 // 获取所有消息
 function getAllMessage() {
@@ -128,13 +111,47 @@ async function createMessage(title, content, author, deadline, isPrivate, succes
   }).catch(res => {
     failF(res)
   })
-
 }
 
 // 判断是否已经添加
 function hasAddMessage(messageId) {
   const db = wx.cloud.database()
 
+  return new Promise((resolve, reject) => {
+    db.collection(RELATION).where({
+      messageId: messageId,
+      _openid: getApp().globalData.openid
+    }).get().then(res => {
+      if (res.data.length > 0)
+        resolve(true)
+      else
+        resolve(false)
+    }).catch(res => {
+      console.log(res)
+      reject(res)
+    })
+  })
+}
+
+function isMessageActive(messagId) {
+  const db = wx.cloud.database()
+
+  return new Promise((resolve, reject) => {
+    db.collection(MESSAGE).doc(messagId).get().then(res => {
+      if (res.data.length > 1 && res.data[0].isDeleted === false)
+        resolve(true)
+      else resolve(false)
+    }).catch(res => {
+      reject(res)
+    })
+  })
+}
+
+// 获取消息
+function getMessageById(messageId) {
+  const db = wx.cloud.database()
+
+  return db.collection(MESSAGE).doc(messageId).get()
 }
 
 module.exports = {
@@ -144,5 +161,8 @@ module.exports = {
   deleteMessage: deleteMessage,
   deleteRelation: deleteRelation,
   getAllMessage: getAllMessage,
-  modifyMessage: modifyMessage
+  modifyMessage: modifyMessage,
+  hasAddMessage: hasAddMessage,
+  isMessageActive: isMessageActive,
+  getMessageById: getMessageById
 }

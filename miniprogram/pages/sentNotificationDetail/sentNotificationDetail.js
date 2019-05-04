@@ -40,7 +40,6 @@ Page({
       mMessage: globalData.sentMessage[this.data.indexOfMessage]
     })
     console.log(this.data.mMessage);
-
   },
 
   /**
@@ -75,13 +74,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function(res) {
-    var that = this;
     if (res.from === 'button') {
       console.log(res.target)
     }
     return {
       title: '你接收到一个通知',
-      path: '/pages/sharePage/sharePage?id=' + that.data.mMessage.messageId
+      path: '/pages/sharePage/sharePage?id=' + this.data.mMessage._id
     }
   },
   editNotification: function(e) {
@@ -116,33 +114,6 @@ Page({
     }).catch(res => {
       console.log("删除失败")
       console.log(res)
-    })
-    // bmobServer.modifyMessage(this.data.mMessage.messageId, null, false, null, null, null, this.cancelNotificationCallback, this.cancelNotificationErrCallback)
-  },
-  cancelNotificationCallback(message) {
-
-    //更新本地
-    globalData.overdueMessage.unshift(globalData.sentMessage.splice(this.data.indexOfMessage, 1)[0]);
-
-    wx.hideToast();
-    wx.showToast({
-      title: '删除成功',
-      icon: "success",
-      duration: 1500,
-      complete: function() {
-        wx.navigateBack({})
-      }
-    })
-
-
-  },
-  cancelNotificationErrCallback(message) {
-    console.log(message);
-    wx.hideToast();
-    wx.showToast({
-      title: '网络出错',
-      icon: 'none',
-      duration: 1000
     })
   }
 })

@@ -33,12 +33,20 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "分享",
+					"pathName": "pages/sharePage/sharePage",
+					"query": "id=9c4488c75cc076b80618298d0e1c89e3",
+					"scene": 1008
 				}
 			]
 		}

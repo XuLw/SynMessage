@@ -54,12 +54,7 @@ exports.main = async(event, context) => {
         // 不是自己发的而且消息已经被删除, 则不返回
         result.splice(i, 1)
         count = count - 1
-        continue
       }
-
-      console.log(today)
-
-
 
       result[i].relationId = m.get(result[i]._id)
 
