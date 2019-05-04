@@ -2,7 +2,7 @@
 <view class='base-container'>
   <view class='system-notification'>
     <image class='noti-image' mode='scaleToFill' src='/images/notice.png'></image>
-    <text style='color:red; margin-left:1em;'>系统通知的一些事情！</text>
+    <text style='color:red; margin-left:1em;'>{{ systemNote }}</text>
   </view>
   <form class='form-container' bindsubmit='submit'>
     <view class='section'>

@@ -1,3 +1,5 @@
+// 全局数据， 和通知排序函数
+
 var globalData = {
   sentMessage: [],
   receivedMessage: [],

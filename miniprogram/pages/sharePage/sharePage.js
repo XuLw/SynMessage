@@ -1,5 +1,6 @@
 // pages/sharePage/sharePage.js
 const dbUtils = require("../../utils/databaseUtil.js")
+const errors = require("../../utils/errors.js")
 
 var now = new Date().getTime();
 
@@ -10,7 +11,8 @@ Page({
    */
   data: {
     messageId: 0,
-    mMessage: {}
+    mMessage: {},
+    isAdded: false
   },
 
   /**
@@ -23,7 +25,7 @@ Page({
 
     //加载消息
 
-    dbUtils.getMessageById(this.data.messageId).then(res => {
+    dbUtils.getMessageById(options.id).then(res => {
       if (!res.data.isDeleted && (now - res.data.deadline < 864000000))
         // 消息还有效
         this.setData({
@@ -42,6 +44,32 @@ Page({
     }).catch(res => {
       console.log(res)
     })
+
+    dbUtils.hasAddMessage(this.data._id).then(res => {
+      if (res) {
+        // 已经添加了
+        wx.hideToast()
+        wx.showToast({
+          title: '已经添加！',
+          icon: 'success',
+          duration: 1000,
+          complete: function() {
+            wx.redirectTo({
+              url: "/pages/main/main"
+            })
+          }
+        })
+        this.setData({
+          isAdded: true
+        })
+      } else {
+        // 未添加 
+
+      }
+    }).catch(res => {
+      console.log(res)
+    })
+
   },
 
   /**
@@ -99,14 +127,14 @@ Page({
     })
 
     // 进行获取
-    dbUtils.hasAddMessage(this.data._id).then(res => {
-      if (res) {
-        // 已经添加了
+    if (!this.data.isAdded) {
+      // 未添加
+      dbUtils.addMessage(this.data._id).then(res => {
         wx.hideToast()
         wx.showToast({
-          title: '已添加！',
+          title: '添加成功！',
           icon: 'success',
-          duration: 3000,
+          duration: 1000,
           complete: function() {
             wx.redirectTo({
               url: "/pages/main/main"
@@ -114,37 +142,23 @@ Page({
           }
         })
 
-      } else {
-        // 未添加 
-        dbUtils.addMessage(this.data._id).then(res => {
-          wx.hideToast()
-          wx.showToast({
-            title: '添加成功！',
-            icon: 'success',
-            duration: 3000,
-            complete: function() {
-              wx.redirectTo({
-                url: "/pages/main/main"
-              })
-            }
-          })
-
-        }).catch(res => {
-          console.log(res)
-          wx.showToast({
-            title: '出现问题了..',
-            icon: 'none',
-            duration: 1000,
-            complete: function() {
-              wx.redirectTo({
-                url: "/pages/main/main"
-              })
-            }
-          })
+      }).catch(res => {
+        errors.
+        wx.showToast({
+          title: '出现问题了..',
+          icon: 'none',
+          duration: 1000,
+          complete: function() {
+            wx.redirectTo({
+              url: "/pages/main/main"
+            })
+          }
         })
-      }
-    }).catch(res => {
-      console.log(res)
-    })
+      })
+    } else {
+      wx.redirectTo({
+        url: "/pages/main/main"
+      })
+    }
   }
 })

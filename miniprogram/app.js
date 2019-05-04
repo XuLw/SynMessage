@@ -1,5 +1,6 @@
 var dbUtil = require("./utils/databaseUtil.js")
 const constants = require('./utils/constants.js')
+var errors = require('./utils/errors.js')
 
 global.regeneratorRuntime = require('./libs/regenerator/runtime-module')
 
@@ -63,6 +64,14 @@ function testHasAddMessage() {
   })
 }
 
+function testGetMessageById() {
+  dbUtil.getMessageById("96c1cbbe5ccd7c3e0bf460fa0ac3d823").then(res => {
+    console.log(res)
+  }).catch(res => {
+    console.log(res)
+  })
+}
+
 
 App({
   globalData: {
@@ -82,6 +91,8 @@ App({
     // testDeleteMessage()
     // testDeleteRelation()
 
+    // testGetMessageById()
+
   },
 
   onShow: function(res) {
@@ -99,6 +110,7 @@ App({
         console.log("success")
 
         // testHasAddMessage()
+
       },
       fail: function(res) {
         console.log("failed")
@@ -114,7 +126,7 @@ App({
             data: res.result.openid,
           })
         }).catch(res => {
-          console.log(res)
+          errors.systemError(res)
         })
       }
     })

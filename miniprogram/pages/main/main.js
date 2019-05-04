@@ -85,7 +85,7 @@ Page({
 
     }).catch(res => {
       wx.hideToast()
-      console.log(res)
+      errors.systemError(res)
     })
 
   },
@@ -173,14 +173,15 @@ Page({
   onReachBottom: function() {
 
   },
-
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function(res) {
-
+  onShareAppMessage: function() {
+    return {
+      title: "管理你的通知把！",
+      url: "/pages/main/main"
+    }
   },
-
   tapOnNewNotification: function() {
     var that = this;
     wx.navigateTo({

@@ -3,6 +3,7 @@
 var app = getApp();
 var globalData = require("../../utils/data.js").globalData;
 var dbUtils = require("../../utils/databaseUtil.js")
+var errors = require("../../utils/errors.js")
 
 Page({
 
@@ -65,11 +66,16 @@ Page({
   onReachBottom: function() {
 
   },
-
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {},
+  onShareAppMessage: function() {
+    return {
+      title: "管理你的通知把！",
+      url: "/pages/main/main"
+    }
+  },
+
   cancelMessage: function() {
     //通过修改关系表concern
     wx.showToast({
@@ -89,7 +95,7 @@ Page({
         wx.navigateBack({})
 
       }).catch(res => {
-        console.log(res)
+        errors.databaseError(res)
       })
     } else {
       // 收到的通知
@@ -100,7 +106,7 @@ Page({
         wx.hideToast()
         wx.navigateBack({})
       }).catch(res => {
-        console.log(res)
+        errors.systemError(res)
       })
     }
 

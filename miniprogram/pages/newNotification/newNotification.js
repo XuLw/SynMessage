@@ -15,7 +15,8 @@ Page({
     curDate: '',
     curTime: '',
     name: "",
-    shareStatus: false
+    shareStatus: false,
+    systemNote: "欢迎使用ZenPlan!"
   },
 
   /**
@@ -80,12 +81,14 @@ Page({
   onReachBottom: function() {
 
   },
-
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: "管理你的通知把！",
+      url: "/pages/main/main"
+    }
   },
   submit: function(e) {
 
@@ -97,8 +100,32 @@ Page({
     var dateTime = new Date(deadlineDate + " " + deadlineTime);
     var name = v.name;
 
-    // TODO 添加错误处理
+    // 错误处理
     let that = this
+
+    var now = new Date().getTime()
+
+    if (title === undefined || title === "") {
+      this.setData({
+        systemNote: "标题不能为空!"
+      })
+      return
+    } else if (content === undefined || content === "") {
+      this.setData({
+        systemNote: "内容不能为空!"
+      })
+      return
+    } else if (name === undefined || name === "") {
+      this.setData({
+        systemNote: "最好署上名字噢!"
+      })
+      return
+    } else if (dateTime.getTime() < now) {
+      this.setData({
+        systemNote: "通知的时间已经过期咯！"
+      })
+      return
+    }
 
     wx.showToast({
       title: '上传中',

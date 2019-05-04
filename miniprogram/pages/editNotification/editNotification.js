@@ -5,6 +5,7 @@ var app = getApp();
 var utils = require("../../utils/util.js");
 var dbUtils = require("../../utils/databaseUtil.js")
 var globalData = require("../../utils/data.js").globalData;
+var errors = require("../../utils/errors.js")
 
 
 var tMessage = {};
@@ -18,7 +19,8 @@ Page({
     mDate: "",
     mTime: "",
     mMessage: {},
-    indexOfMessage: 0
+    indexOfMessage: 0,
+    systemNote: "新功能持续完善中！"
   },
 
   /**
@@ -83,11 +85,36 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return {
+      title: "管理你的通知把！",
+      url: "/pages/main/main"
+    }
   },
   submit: function(e) {
 
     var v = e.detail.value;
+
+    if (v.title === undefined || v.title === "") {
+      this.setData({
+        systemNote: "标题不能为空!"
+      })
+      return
+    } else if (v.content === undefined || v.content === "") {
+      this.setData({
+        systemNote: "内容不能为空!"
+      })
+      return
+    } else if (v.name === undefined || v.name === "") {
+      this.setData({
+        systemNote: "最好署上名字噢!"
+      })
+      return
+    } else if (v.dateTime.getTime() < now) {
+      this.setData({
+        systemNote: "通知的时间已经过期咯！"
+      })
+      return
+    }
 
     this.data.mMessage.title = v.title
     this.data.mMessage.content = v.content
@@ -119,7 +146,7 @@ Page({
       })
 
     }).catch(res => {
-      console.log(res)
+      errors.databaseError(res)
     })
 
 

@@ -1,3 +1,5 @@
+// 一些工具函数
+
 const getDate = function(datetime) {
   return datetime.getFullYear() + '-' + (("0" + (datetime.getMonth() + 1)).slice(-2)) + '-' + (("0" + datetime.getDate()).slice(-2))
 }

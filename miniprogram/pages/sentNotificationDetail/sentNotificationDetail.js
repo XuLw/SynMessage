@@ -1,6 +1,7 @@
 var app = getApp();
 var globalData = require("../../utils/data.js").globalData;
 var dbUtils = require("../../utils/databaseUtil.js")
+var errors = require("../../utils/errors.js")
 
 Page({
 
@@ -112,7 +113,7 @@ Page({
       })
 
     }).catch(res => {
-      console.log("删除失败")
+      errors.systemError(res)
       console.log(res)
     })
   }

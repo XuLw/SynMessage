@@ -1,3 +1,6 @@
+// 数据库操作函数
+var errors = require("./errors.js")
+
 const {
   regeneratorRuntime
 } = global
@@ -36,7 +39,7 @@ function _createMessage(title, content, author, deadline, isPrivate) {
     }).then(res => {
       resolve(res._id)
     }).catch(res => {
-      console.log(res)
+      errors.databaseError(res)
       reject(res)
     })
   })
@@ -127,7 +130,7 @@ function hasAddMessage(messageId) {
       else
         resolve(false)
     }).catch(res => {
-      console.log(res)
+      errors.databaseError(res)
       reject(res)
     })
   })
@@ -151,7 +154,9 @@ function isMessageActive(messagId) {
 function getMessageById(messageId) {
   const db = wx.cloud.database()
 
-  return db.collection(MESSAGE).doc(messageId).get()
+  return db.collection(MESSAGE).where({
+    _id: messageId
+  }).get()
 }
 
 module.exports = {

@@ -28,7 +28,7 @@
     </view>
     <view  class='foot-right' >
       <button  class='share-button' hover-class='share-button-down' hover-stay-time='100' open-type='share'>
-        <text style='color:white '>分享到群</text>
+        <text style='color:white '>通知Ta们</text>
       </button>
     </view>
   </view>
